@@ -50,17 +50,34 @@ body {
 
 .star {
   position: absolute;
-  width: 3px;
-  height: 3px;
-  background: white;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at center, #fff 0%, #fff 40%, transparent 70%);
   border-radius: 50%;
-  animation: twinkle 1.5s infinite;
+  animation: twinkle 1.5s infinite, scroll 15s linear infinite;
   cursor: pointer;
+  box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+  transition: transform 0.2s;
+}
+
+.star:hover {
+  transform: scale(1.2);
 }
 
 @keyframes twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.5); }
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes scroll {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100vw); }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .controls {
@@ -114,12 +131,6 @@ p {
   font-size: 1.5rem;
   color: #ccc;
   margin-bottom: 40px;
-}
-
-@keyframes gradientMove {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
 }
 
 .emoji {

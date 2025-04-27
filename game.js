@@ -3,7 +3,7 @@ class StarGame {
     this.score = 0;
     this.timeLeft = 60;
     this.gameActive = false;
-    this.starCount = 20;
+    this.starCount = 15; // Reduced count since stars are bigger
     this.nightSky = document.getElementById('nightSky');
     this.scoreElement = document.getElementById('score');
     this.timerElement = document.getElementById('timer');
@@ -34,6 +34,7 @@ class StarGame {
       star.style.left = `${Math.random() * 100}%`;
       star.style.top = `${Math.random() * 100}%`;
       star.style.animationDelay = `${Math.random() * 2}s`;
+      star.style.animationDuration = `${10 + Math.random() * 10}s`; // Random duration between 10-20s
       
       star.addEventListener('click', () => this.collectStar(star));
       this.nightSky.appendChild(star);
@@ -53,6 +54,7 @@ class StarGame {
     newStar.style.left = `${Math.random() * 100}%`;
     newStar.style.top = `${Math.random() * 100}%`;
     newStar.style.animationDelay = `${Math.random() * 2}s`;
+    newStar.style.animationDuration = `${10 + Math.random() * 10}s`; // Random duration between 10-20s
     newStar.addEventListener('click', () => this.collectStar(newStar));
     this.nightSky.appendChild(newStar);
   }
