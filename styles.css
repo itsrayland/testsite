@@ -117,6 +117,20 @@ body {
   font-size: 0.9rem;
 }
 
+.game-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin: 0;
+  padding: 10px 0;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 8s ease infinite;
+  width: 100%;
+  display: block;
+}
+
 h1 {
   font-size: 3rem;
   background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
