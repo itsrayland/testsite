@@ -3,16 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello Ramin!</title>
+  <title>Ramin & Rays Chasing the Stars!</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="game-container">
+    <div class="score-board">
+      <h2>Stars Found: <span id="score">0</span></h2>
+      <h3>Time: <span id="timer">60</span>s</h3>
+    </div>
+    
+    <div class="night-sky" id="nightSky">
+      <!-- Stars will be generated here by JavaScript -->
+    </div>
 
-  <div class="emoji">✨🌈🚀💖</div>
-  <h1>Hello Ramin!</h1>
-  <p>Welcome to our bright new adventure!</p>
-  <div class="emoji">🌟🎉🍀🔥</div>
+    <div class="controls">
+      <button id="startGame">Start Game</button>
+      <div class="instructions">
+        <h3>How to Play:</h3>
+        <p>Click on the twinkling stars to collect them!</p>
+        <p>Find as many stars as you can in 60 seconds!</p>
+      </div>
+    </div>
+  </div>
 
+  <script src="game.js"></script>
 </body>
 </html>
