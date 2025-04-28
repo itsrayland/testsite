@@ -44,7 +44,7 @@
       align-items: center;
     }
 
-    .logo {
+    .nav-brand {
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--primary);
@@ -63,6 +63,10 @@
     }
 
     .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link.active {
       color: var(--primary);
     }
 
@@ -277,12 +281,13 @@
 </head>
 <body>
   <nav class="navbar">
-    <div class="logo">SkyWings</div>
+    <div class="nav-brand">Ramin & Rays</div>
     <div class="nav-links">
-      <a href="#" class="nav-link">Home</a>
-      <a href="#" class="nav-link">Flights</a>
-      <a href="#" class="nav-link">Deals</a>
-      <a href="#" class="nav-link">Contact</a>
+      <a href="index.html" class="nav-link">Star Game</a>
+      <a href="css-tricks.html" class="nav-link">CSS Tricks</a>
+      <a href="airline-booking.html" class="nav-link active">Airline Booking</a>
+      <a href="airtable-manager.html" class="nav-link">Airtable Manager</a>
+      <a href="inline-nav.html" class="nav-link">Inline Nav</a>
     </div>
   </nav>
 
