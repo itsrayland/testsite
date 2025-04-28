@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inline Navigation Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css-tricks.css">
+  <link rel="stylesheet" href="inline-nav.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">Ramin & Rays</div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Star Game</a>
+      <a href="css-tricks.html" class="nav-link">CSS Tricks</a>
+      <a href="inline-nav.html" class="nav-link active">Inline Nav</a>
+    </div>
+  </nav>
+
+  <div class="inline-nav">
+    <a href="#section1" class="inline-nav-link">Section 1</a>
+    <a href="#section2" class="inline-nav-link">Section 2</a>
+    <a href="#section3" class="inline-nav-link">Section 3</a>
+    <a href="#section4" class="inline-nav-link">Section 4</a>
+  </div>
+
+  <div class="content-container">
+    <section id="section1" class="content-section">
+      <h2>Section 1: Gradient Cards</h2>
+      <div class="card-grid">
+        <div class="gradient-card">Card 1</div>
+        <div class="gradient-card">Card 2</div>
+        <div class="gradient-card">Card 3</div>
+        <div class="gradient-card">Card 4</div>
+      </div>
+    </section>
+
+    <section id="section2" class="content-section">
+      <h2>Section 2: Animated Elements</h2>
+      <div class="animation-container">
+        <div class="floating-element">Float</div>
+        <div class="rotating-element">Rotate</div>
+        <div class="pulsing-element">Pulse</div>
+      </div>
+    </section>
+
+    <section id="section3" class="content-section">
+      <h2>Section 3: Interactive Gallery</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <div class="gallery-content">Hover Me!</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-content">Hover Me!</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-content">Hover Me!</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="section4" class="content-section">
+      <h2>Section 4: 3D Effects</h2>
+      <div class="effects-container">
+        <div class="tilt-card">Tilt Me!</div>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">Front</div>
+            <div class="flip-card-back">Back</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="inline-nav.js"></script>
+</body>
+</html> 

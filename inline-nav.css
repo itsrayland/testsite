@@ -1,0 +1,263 @@
+/* Inline Navigation */
+.inline-nav {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  z-index: 900;
+  backdrop-filter: blur(10px);
+}
+
+.inline-nav-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.inline-nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.inline-nav-link:hover::before {
+  opacity: 1;
+}
+
+/* Content Container */
+.content-container {
+  max-width: 1200px;
+  margin: 160px auto 0;
+  padding: 2rem;
+}
+
+.content-section {
+  min-height: 100vh;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+}
+
+.content-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Section 1: Gradient Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.gradient-card {
+  height: 200px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.gradient-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Section 2: Animated Elements */
+.animation-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.floating-element {
+  padding: 2rem;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border-radius: 10px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.rotating-element {
+  padding: 2rem;
+  background: linear-gradient(45deg, #4ade80, #facc15);
+  border-radius: 10px;
+  animation: rotate 3s linear infinite;
+}
+
+.pulsing-element {
+  padding: 2rem;
+  background: linear-gradient(45deg, #7873f5, #ff6ec4);
+  border-radius: 10px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Section 3: Interactive Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.gallery-item {
+  height: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.gallery-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-content {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* Section 4: 3D Effects */
+.effects-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.tilt-card {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.flip-card {
+  width: 200px;
+  height: 200px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.flip-card-front {
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+}
+
+.flip-card-back {
+  background: linear-gradient(45deg, #4ade80, #facc15);
+  transform: rotateY(180deg);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .inline-nav {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .content-container {
+    margin-top: 140px;
+  }
+  
+  .content-section {
+    padding: 1rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .animation-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+} 
