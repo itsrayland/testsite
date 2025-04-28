@@ -1,3 +1,13 @@
+/* Base Styles */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
 /* Navigation Bar */
 .navbar {
   background: rgba(0, 0, 0, 0.8);
@@ -49,7 +59,7 @@
   margin: 80px auto 0;
   padding: 2rem;
   min-height: calc(100vh - 80px);
-  overflow-y: auto;
+  position: relative;
 }
 
 .page-title {
