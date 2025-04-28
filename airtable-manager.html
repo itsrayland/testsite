@@ -2,548 +2,441 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Airtable Manager</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
   <style>
-    :root {
-      --primary: #2563eb;
-      --secondary: #1e40af;
-      --accent: #f59e0b;
-      --text: #1f2937;
-      --light: #f3f4f6;
-      --success: #10b981;
-      --danger: #ef4444;
+    .table-container {
+      margin-top: 20px;
+      overflow-x: auto;
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    .nav-tabs {
+      margin-bottom: 20px;
     }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 2rem;
+    .action-buttons {
+      margin-bottom: 20px;
     }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .title {
-      font-size: 2rem;
-      color: var(--primary);
-    }
-
-    .add-button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 10px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .add-button:hover {
-      background: var(--secondary);
-    }
-
-    .tables-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .table-card {
-      background: white;
-      border-radius: 15px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .table-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .table-name {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    .table-actions {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .action-button {
-      padding: 0.5rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .edit-button {
-      background: var(--light);
-      color: var(--text);
-    }
-
-    .delete-button {
-      background: var(--danger);
-      color: white;
-    }
-
-    .fields-list {
-      list-style: none;
-    }
-
-    .field-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem;
-      border-bottom: 1px solid var(--light);
-    }
-
-    .field-item:last-child {
-      border-bottom: none;
-    }
-
-    .field-name {
-      font-weight: 500;
-    }
-
-    .field-type {
-      color: #6b7280;
-      font-size: 0.875rem;
-    }
-
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 500px;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .modal-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-
-    .close-button {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text);
-    }
-
     .form-group {
-      margin-bottom: 1rem;
+      margin-bottom: 15px;
     }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 0.75rem;
-      border: 2px solid var(--light);
-      border-radius: 10px;
-      font-size: 1rem;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .cancel-button {
-      background: var(--light);
-      color: var(--text);
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 10px;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    .save-button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 10px;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    .save-button:hover {
-      background: var(--secondary);
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      color: white;
-      font-weight: 500;
+    .loading {
       display: none;
+      text-align: center;
+      padding: 20px;
     }
-
-    .toast.success {
-      background: var(--success);
-    }
-
-    .toast.error {
-      background: var(--danger);
-    }
-
-    .toast.show {
-      display: block;
+    .error-message {
+      color: red;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1 class="title">Airtable Manager</h1>
-      <button class="add-button" id="addTableButton">Add New Table</button>
+  <div class="container mt-4">
+    <h1 class="mb-4">Airtable Manager</h1>
+    
+    <!-- Table Selection -->
+    <ul class="nav nav-tabs" id="tableTabs" role="tablist">
+      <!-- Tabs will be dynamically populated -->
+    </ul>
+
+    <!-- Table Content -->
+    <div class="tab-content" id="tableContent">
+      <!-- Content will be dynamically populated -->
     </div>
 
-    <div class="tables-grid" id="tablesGrid">
-      <!-- Tables will be dynamically added here -->
-    </div>
-  </div>
-
-  <!-- Add/Edit Table Modal -->
-  <div class="modal" id="tableModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Add New Table</h2>
-        <button class="close-button">&times;</button>
+    <!-- Loading Indicator -->
+    <div class="loading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
-      <form id="tableForm">
-        <div class="form-group">
-          <label>Table Name</label>
-          <input type="text" name="tableName" required>
-        </div>
-        <div class="form-group">
-          <label>Description</label>
-          <input type="text" name="description">
-        </div>
-        <div class="modal-actions">
-          <button type="button" class="cancel-button">Cancel</button>
-          <button type="submit" class="save-button">Save Table</button>
-        </div>
-      </form>
     </div>
+
+    <!-- Error Message -->
+    <div class="error-message"></div>
   </div>
 
-  <!-- Add/Edit Field Modal -->
-  <div class="modal" id="fieldModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Add New Field</h2>
-        <button class="close-button">&times;</button>
+  <!-- Add/Edit Record Modal -->
+  <div class="modal fade" id="recordModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add/Edit Record</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="recordForm">
+            <!-- Form fields will be dynamically populated -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveRecord">Save</button>
+        </div>
       </div>
-      <form id="fieldForm">
-        <div class="form-group">
-          <label>Field Name</label>
-          <input type="text" name="fieldName" required>
-        </div>
-        <div class="form-group">
-          <label>Field Type</label>
-          <select name="fieldType" required>
-            <option value="text">Text</option>
-            <option value="number">Number</option>
-            <option value="date">Date</option>
-            <option value="boolean">Boolean</option>
-            <option value="select">Select</option>
-            <option value="multiselect">Multi-select</option>
-            <option value="link">Link</option>
-          </select>
-        </div>
-        <div class="modal-actions">
-          <button type="button" class="cancel-button">Cancel</button>
-          <button type="submit" class="save-button">Save Field</button>
-        </div>
-      </form>
     </div>
   </div>
 
-  <div class="toast" id="toast"></div>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // State management
+    // Airtable API configuration
+    const AIRTABLE_PAT = "patWHuF2gFQ21OC7T.e9547c1767d09023fe68ab84daeb70ffc07aa5327458b55a7a17bfad6ebde39d";
+    const BASE_ID = "appsCxfQMU3zteRBo";
+    const BASE_URL = `https://api.airtable.com/v0/${BASE_ID}`;
+    const META_URL = `https://api.airtable.com/v0/meta/bases/${BASE_ID}/tables`;
+
     let currentTable = null;
-    let tables = [];
+    let tableSchema = null;
 
-    // DOM Elements
-    const tablesGrid = document.getElementById('tablesGrid');
-    const tableModal = document.getElementById('tableModal');
-    const fieldModal = document.getElementById('fieldModal');
-    const tableForm = document.getElementById('tableForm');
-    const fieldForm = document.getElementById('fieldForm');
-    const toast = document.getElementById('toast');
-
-    // Event Listeners
-    document.getElementById('addTableButton').addEventListener('click', () => {
-      showModal(tableModal);
-    });
-
-    document.querySelectorAll('.close-button').forEach(button => {
-      button.addEventListener('click', () => {
-        hideModal(tableModal);
-        hideModal(fieldModal);
-      });
-    });
-
-    document.querySelectorAll('.cancel-button').forEach(button => {
-      button.addEventListener('click', () => {
-        hideModal(tableModal);
-        hideModal(fieldModal);
-      });
-    });
-
-    tableForm.addEventListener('submit', handleTableSubmit);
-    fieldForm.addEventListener('submit', handleFieldSubmit);
-
-    // Functions
-    function showModal(modal) {
-      modal.classList.add('show');
+    // Fetch table schema
+    async function fetchSchema() {
+      try {
+        const response = await fetch(META_URL, {
+          headers: {
+            'Authorization': `Bearer ${AIRTABLE_PAT}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        return data.tables;
+      } catch (error) {
+        showError('Error fetching schema: ' + error.message);
+        return [];
+      }
     }
 
-    function hideModal(modal) {
-      modal.classList.remove('show');
+    // Fetch records for a table
+    async function fetchRecords(tableId) {
+      try {
+        const response = await fetch(`${BASE_URL}/${tableId}`, {
+          headers: {
+            'Authorization': `Bearer ${AIRTABLE_PAT}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        return data.records;
+      } catch (error) {
+        showError('Error fetching records: ' + error.message);
+        return [];
+      }
     }
 
-    function showToast(message, type = 'success') {
-      toast.textContent = message;
-      toast.className = `toast ${type} show`;
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3000);
+    // Create or update a record
+    async function saveRecord(tableId, record) {
+      try {
+        const method = record.id ? 'PATCH' : 'POST';
+        const url = record.id 
+          ? `${BASE_URL}/${tableId}/${record.id}`
+          : `${BASE_URL}/${tableId}`;
+        
+        const response = await fetch(url, {
+          method: method,
+          headers: {
+            'Authorization': `Bearer ${AIRTABLE_PAT}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fields: record.fields
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to save record');
+        }
+        
+        return await response.json();
+      } catch (error) {
+        showError('Error saving record: ' + error.message);
+        return null;
+      }
     }
 
-    function renderTables() {
-      tablesGrid.innerHTML = tables.map(table => `
-        <div class="table-card">
-          <div class="table-header">
-            <h3 class="table-name">${table.name}</h3>
-            <div class="table-actions">
-              <button class="action-button edit-button" onclick="editTable('${table.id}')">
-                Edit
-              </button>
-              <button class="action-button delete-button" onclick="deleteTable('${table.id}')">
-                Delete
-              </button>
-            </div>
-          </div>
-          <ul class="fields-list">
-            ${table.fields.map(field => `
-              <li class="field-item">
-                <div>
-                  <span class="field-name">${field.name}</span>
-                  <span class="field-type">${field.type}</span>
-                </div>
-                <div class="table-actions">
-                  <button class="action-button edit-button" onclick="editField('${table.id}', '${field.id}')">
-                    Edit
-                  </button>
-                  <button class="action-button delete-button" onclick="deleteField('${table.id}', '${field.id}')">
-                    Delete
-                  </button>
-                </div>
-              </li>
-            `).join('')}
-          </ul>
-          <button class="add-button" onclick="addField('${table.id}')" style="margin-top: 1rem;">
-            Add Field
+    // Delete a record
+    async function deleteRecord(tableId, recordId) {
+      try {
+        const response = await fetch(`${BASE_URL}/${tableId}/${recordId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${AIRTABLE_PAT}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to delete record');
+        }
+        
+        return true;
+      } catch (error) {
+        showError('Error deleting record: ' + error.message);
+        return false;
+      }
+    }
+
+    // Initialize the interface
+    async function initializeInterface() {
+      const tables = await fetchSchema();
+      const tabList = document.getElementById('tableTabs');
+      const tabContent = document.getElementById('tableContent');
+      
+      tables.forEach((table, index) => {
+        // Create tab
+        const tab = document.createElement('li');
+        tab.className = 'nav-item';
+        tab.innerHTML = `
+          <button class="nav-link ${index === 0 ? 'active' : ''}" 
+                  id="tab-${table.id}" 
+                  data-bs-toggle="tab" 
+                  data-bs-target="#content-${table.id}" 
+                  type="button" 
+                  role="tab">
+            ${table.name}
           </button>
-        </div>
-      `).join('');
+        `;
+        tabList.appendChild(tab);
+
+        // Create tab content
+        const content = document.createElement('div');
+        content.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
+        content.id = `content-${table.id}`;
+        content.innerHTML = `
+          <div class="action-buttons">
+            <button class="btn btn-primary" onclick="showAddRecordModal('${table.id}')">
+              <i class="bi bi-plus"></i> Add Record
+            </button>
+          </div>
+          <div class="table-container">
+            <table class="table table-striped">
+              <thead>
+                <tr id="header-${table.id}"></tr>
+              </thead>
+              <tbody id="body-${table.id}"></tbody>
+            </table>
+          </div>
+        `;
+        tabContent.appendChild(content);
+
+        // Load initial data
+        if (index === 0) {
+          loadTableData(table);
+        }
+      });
+
+      // Add tab click handlers
+      document.querySelectorAll('.nav-link').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          const tableId = e.target.id.replace('tab-', '');
+          const table = tables.find(t => t.id === tableId);
+          if (table) {
+            loadTableData(table);
+          }
+        });
+      });
     }
 
-    async function handleTableSubmit(e) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const tableData = {
-        name: formData.get('tableName'),
-        description: formData.get('description'),
-        fields: []
-      };
+    // Load table data
+    async function loadTableData(table) {
+      showLoading(true);
+      currentTable = table;
+      tableSchema = table;
 
-      try {
-        // Here you would make an API call to Airtable
-        const newTable = {
-          id: Date.now().toString(),
-          ...tableData
-        };
-        tables.push(newTable);
-        renderTables();
-        hideModal(tableModal);
-        showToast('Table created successfully');
-      } catch (error) {
-        showToast('Error creating table', 'error');
-      }
+      const records = await fetchRecords(table.id);
+      const headerRow = document.getElementById(`header-${table.id}`);
+      const body = document.getElementById(`body-${table.id}`);
+
+      // Clear existing content
+      headerRow.innerHTML = '';
+      body.innerHTML = '';
+
+      // Add header cells
+      table.fields.forEach(field => {
+        const th = document.createElement('th');
+        th.textContent = field.name;
+        headerRow.appendChild(th);
+      });
+      headerRow.innerHTML += '<th>Actions</th>';
+
+      // Add data rows
+      records.forEach(record => {
+        const tr = document.createElement('tr');
+        table.fields.forEach(field => {
+          const td = document.createElement('td');
+          td.textContent = record.fields[field.name] || '';
+          tr.appendChild(td);
+        });
+
+        // Add action buttons
+        const actionsTd = document.createElement('td');
+        actionsTd.innerHTML = `
+          <button class="btn btn-sm btn-primary" onclick="showEditRecordModal('${table.id}', '${record.id}')">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" onclick="confirmDelete('${table.id}', '${record.id}')">
+            <i class="bi bi-trash"></i>
+          </button>
+        `;
+        tr.appendChild(actionsTd);
+        body.appendChild(tr);
+      });
+
+      showLoading(false);
     }
 
-    async function handleFieldSubmit(e) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const fieldData = {
-        name: formData.get('fieldName'),
-        type: formData.get('fieldType')
-      };
+    // Show add record modal
+    function showAddRecordModal(tableId) {
+      const table = tableSchema;
+      const form = document.getElementById('recordForm');
+      form.innerHTML = '';
 
-      try {
-        // Here you would make an API call to Airtable
-        const table = tables.find(t => t.id === currentTable);
-        if (table) {
-          table.fields.push({
-            id: Date.now().toString(),
-            ...fieldData
+      table.fields.forEach(field => {
+        const formGroup = document.createElement('div');
+        formGroup.className = 'form-group';
+        
+        const label = document.createElement('label');
+        label.className = 'form-label';
+        label.textContent = field.name;
+        
+        let input;
+        if (field.type === 'singleSelect') {
+          input = document.createElement('select');
+          input.className = 'form-select';
+          field.options.choices.forEach(choice => {
+            const option = document.createElement('option');
+            option.value = choice.name;
+            option.textContent = choice.name;
+            input.appendChild(option);
           });
-          renderTables();
-          hideModal(fieldModal);
-          showToast('Field added successfully');
+        } else if (field.type === 'multilineText') {
+          input = document.createElement('textarea');
+          input.className = 'form-control';
+        } else {
+          input = document.createElement('input');
+          input.className = 'form-control';
+          input.type = field.type === 'email' ? 'email' : 'text';
         }
-      } catch (error) {
-        showToast('Error adding field', 'error');
+        
+        input.name = field.name;
+        formGroup.appendChild(label);
+        formGroup.appendChild(input);
+        form.appendChild(formGroup);
+      });
+
+      const modal = new bootstrap.Modal(document.getElementById('recordModal'));
+      modal.show();
+
+      // Save button handler
+      document.getElementById('saveRecord').onclick = async () => {
+        const fields = {};
+        table.fields.forEach(field => {
+          const input = form.elements[field.name];
+          fields[field.name] = input.value;
+        });
+
+        const success = await saveRecord(tableId, { fields });
+        if (success) {
+          modal.hide();
+          loadTableData(table);
+        }
+      };
+    }
+
+    // Show edit record modal
+    async function showEditRecordModal(tableId, recordId) {
+      const table = tableSchema;
+      const records = await fetchRecords(tableId);
+      const record = records.find(r => r.id === recordId);
+      
+      if (!record) {
+        showError('Record not found');
+        return;
       }
+
+      const form = document.getElementById('recordForm');
+      form.innerHTML = '';
+
+      table.fields.forEach(field => {
+        const formGroup = document.createElement('div');
+        formGroup.className = 'form-group';
+        
+        const label = document.createElement('label');
+        label.className = 'form-label';
+        label.textContent = field.name;
+        
+        let input;
+        if (field.type === 'singleSelect') {
+          input = document.createElement('select');
+          input.className = 'form-select';
+          field.options.choices.forEach(choice => {
+            const option = document.createElement('option');
+            option.value = choice.name;
+            option.textContent = choice.name;
+            if (record.fields[field.name] === choice.name) {
+              option.selected = true;
+            }
+            input.appendChild(option);
+          });
+        } else if (field.type === 'multilineText') {
+          input = document.createElement('textarea');
+          input.className = 'form-control';
+          input.value = record.fields[field.name] || '';
+        } else {
+          input = document.createElement('input');
+          input.className = 'form-control';
+          input.type = field.type === 'email' ? 'email' : 'text';
+          input.value = record.fields[field.name] || '';
+        }
+        
+        input.name = field.name;
+        formGroup.appendChild(label);
+        formGroup.appendChild(input);
+        form.appendChild(formGroup);
+      });
+
+      const modal = new bootstrap.Modal(document.getElementById('recordModal'));
+      modal.show();
+
+      // Save button handler
+      document.getElementById('saveRecord').onclick = async () => {
+        const fields = {};
+        table.fields.forEach(field => {
+          const input = form.elements[field.name];
+          fields[field.name] = input.value;
+        });
+
+        const success = await saveRecord(tableId, { id: recordId, fields });
+        if (success) {
+          modal.hide();
+          loadTableData(table);
+        }
+      };
     }
 
-    function editTable(tableId) {
-      const table = tables.find(t => t.id === tableId);
-      if (table) {
-        const form = tableForm;
-        form.tableName.value = table.name;
-        form.description.value = table.description;
-        currentTable = tableId;
-        showModal(tableModal);
-      }
-    }
-
-    function deleteTable(tableId) {
-      if (confirm('Are you sure you want to delete this table?')) {
-        tables = tables.filter(t => t.id !== tableId);
-        renderTables();
-        showToast('Table deleted successfully');
-      }
-    }
-
-    function addField(tableId) {
-      currentTable = tableId;
-      fieldForm.reset();
-      showModal(fieldModal);
-    }
-
-    function editField(tableId, fieldId) {
-      const table = tables.find(t => t.id === tableId);
-      const field = table?.fields.find(f => f.id === fieldId);
-      if (field) {
-        const form = fieldForm;
-        form.fieldName.value = field.name;
-        form.fieldType.value = field.type;
-        currentTable = tableId;
-        showModal(fieldModal);
-      }
-    }
-
-    function deleteField(tableId, fieldId) {
-      if (confirm('Are you sure you want to delete this field?')) {
-        const table = tables.find(t => t.id === tableId);
-        if (table) {
-          table.fields = table.fields.filter(f => f.id !== fieldId);
-          renderTables();
-          showToast('Field deleted successfully');
+    // Confirm and delete record
+    async function confirmDelete(tableId, recordId) {
+      if (confirm('Are you sure you want to delete this record?')) {
+        const success = await deleteRecord(tableId, recordId);
+        if (success) {
+          loadTableData(currentTable);
         }
       }
     }
 
-    // Initialize with some sample data
-    tables = [
-      {
-        id: '1',
-        name: 'Flights',
-        description: 'Flight information',
-        fields: [
-          { id: '1', name: 'Flight Number', type: 'text' },
-          { id: '2', name: 'Departure Time', type: 'date' },
-          { id: '3', name: 'Price', type: 'number' }
-        ]
-      },
-      {
-        id: '2',
-        name: 'Bookings',
-        description: 'Booking information',
-        fields: [
-          { id: '4', name: 'Booking ID', type: 'text' },
-          { id: '5', name: 'Customer Name', type: 'text' },
-          { id: '6', name: 'Status', type: 'select' }
-        ]
-      }
-    ];
+    // Utility functions
+    function showLoading(show) {
+      document.querySelector('.loading').style.display = show ? 'block' : 'none';
+    }
 
-    renderTables();
+    function showError(message) {
+      const errorDiv = document.querySelector('.error-message');
+      errorDiv.textContent = message;
+      setTimeout(() => {
+        errorDiv.textContent = '';
+      }, 5000);
+    }
+
+    // Initialize the interface when the page loads
+    document.addEventListener('DOMContentLoaded', initializeInterface);
   </script>
 </body>
 </html> 
