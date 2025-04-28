@@ -327,4 +327,788 @@ body {
   .left { transform: rotateY(-90deg) translateZ(75px); }
   .top { transform: rotateX(90deg) translateZ(75px); }
   .bottom { transform: rotateX(-90deg) translateZ(75px); }
+}
+
+/* Morphing Button */
+.morph-button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.morph-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.morph-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #7873f5, #ff6ec4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.morph-button:hover::before {
+  opacity: 1;
+}
+
+/* Floating Card */
+.floating-card {
+  width: 300px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.floating-card:hover {
+  transform: translateY(-10px) rotateX(10deg) rotateY(10deg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-content {
+  color: white;
+  text-align: center;
+}
+
+/* Text Split Effect */
+.split-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  display: inline-block;
+}
+
+.split-text::before,
+.split-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.split-text::after {
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+  transform: translateX(100%);
+}
+
+.split-text:hover::before {
+  transform: translateX(0);
+}
+
+.split-text:hover::after {
+  transform: translateX(0);
+}
+
+/* Glowing Border */
+.glowing-border {
+  padding: 2rem;
+  border-radius: 15px;
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.glowing-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+  z-index: -1;
+  animation: borderGlow 3s linear infinite;
+}
+
+.border-content {
+  color: white;
+  text-align: center;
+}
+
+/* 3D Card Flip */
+.flip-card {
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
+  margin: 0 auto;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border-radius: 15px;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(45deg, #7873f5, #ff6ec4);
+}
+
+/* Animated Border */
+.animated-border {
+  padding: 2rem;
+  border-radius: 15px;
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff6ec4, transparent);
+  animation: borderMove 2s linear infinite;
+}
+
+.border-content {
+  color: white;
+  text-align: center;
+}
+
+/* Text Gradient Animation */
+.text-gradient-animation {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 5s ease infinite;
+}
+
+/* Hover Reveal */
+.hover-reveal {
+  width: 300px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.reveal-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.hover-reveal:hover .reveal-content {
+  transform: rotateY(180deg);
+}
+
+.reveal-front,
+.reveal-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border-radius: 15px;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.reveal-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(45deg, #7873f5, #ff6ec4);
+}
+
+/* Pulse Effect */
+.pulse-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse-circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  animation: pulse 2s ease-out infinite;
+}
+
+.pulse-text {
+  color: white;
+  font-size: 1.5rem;
+  z-index: 1;
+}
+
+/* Shimmer Effect */
+.shimmer-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-text::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* Additional Animations */
+@keyframes borderGlow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes borderMove {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Magnetic Button */
+.magnetic-button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Parallax Card */
+.parallax-card {
+  width: 300px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Text Glitch */
+.glitch-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  animation: glitch 1s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff6ec4;
+  animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: 2px 0 #7873f5;
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+/* Rainbow Border */
+.rainbow-border {
+  padding: 2rem;
+  border-radius: 15px;
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.rainbow-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+  z-index: -1;
+  animation: borderRotate 3s linear infinite;
+}
+
+/* 3D Button */
+.button-3d {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.button-3d:hover {
+  transform: translateY(-5px) rotateX(10deg);
+}
+
+/* Text Wave */
+.wave-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  display: inline-block;
+}
+
+.wave-text span {
+  display: inline-block;
+  animation: wave 1s infinite;
+  animation-delay: calc(0.1s * var(--i));
+}
+
+/* Floating Label */
+.floating-label {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.floating-label input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+}
+
+.floating-label label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.floating-label input:focus + label,
+.floating-label input:valid + label {
+  top: 0;
+  font-size: 0.8rem;
+  color: #ff6ec4;
+}
+
+/* Image Hover */
+.image-hover {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.image-hover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.hover-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-hover:hover img {
+  transform: scale(1.1);
+}
+
+.image-hover:hover .hover-content {
+  opacity: 1;
+}
+
+/* Text Shadow */
+.shadow-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 
+    2px 2px 0 #ff6ec4,
+    4px 4px 0 #7873f5,
+    6px 6px 0 #4ade80;
+}
+
+/* Button Ripple */
+.ripple-button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+}
+
+/* Card Stack */
+.card-stack {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.stack-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.stack-card:nth-child(1) { transform: translateY(0); }
+.stack-card:nth-child(2) { transform: translateY(10px); }
+.stack-card:nth-child(3) { transform: translateY(20px); }
+
+.card-stack:hover .stack-card:nth-child(1) { transform: translateY(-20px); }
+.card-stack:hover .stack-card:nth-child(2) { transform: translateY(-10px); }
+.card-stack:hover .stack-card:nth-child(3) { transform: translateY(0); }
+
+/* Text Gradient Border */
+.gradient-border-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  padding: 0.5rem;
+}
+
+.gradient-border-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+/* Hover Card */
+.hover-card-effect {
+  width: 300px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  margin: 0 auto;
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border-radius: 15px;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(45deg, #7873f5, #ff6ec4);
+}
+
+.hover-card-effect:hover {
+  transform: rotateY(180deg);
+}
+
+/* Text Reveal */
+.reveal-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.reveal-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff6ec4;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.reveal-text:hover::before {
+  transform: translateX(0);
+}
+
+/* Button Glow */
+.glow-button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 20px #ff6ec4;
+}
+
+/* Card Tilt */
+.tilt-card {
+  width: 300px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Text Split */
+.split-text-effect {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  display: inline-block;
+}
+
+.split-text-effect::before,
+.split-text-effect::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.split-text-effect::after {
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+  transform: translateX(100%);
+}
+
+.split-text-effect:hover::before {
+  transform: translateX(0);
+}
+
+.split-text-effect:hover::after {
+  transform: translateX(0);
+}
+
+/* Button Pulse */
+.pulse-button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+
+/* Card Scale */
+.scale-card {
+  width: 300px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.scale-card:hover {
+  transform: scale(1.1);
+}
+
+/* Additional Animations */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-anim {
+  0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); }
+  20% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); }
+  30% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); }
+  40% { clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%); }
+  50% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); }
+  55% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); }
+  60% { clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%); }
+  65% { clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%); }
+  70% { clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%); }
+  80% { clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%); }
+  85% { clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%); }
+  95% { clip-path: polygon(0 72%, 100% 72%, 100% 78%, 0 78%); }
+  100% { clip-path: polygon(0 85%, 100% 85%, 100% 85%, 0 85%); }
+}
+
+@keyframes borderRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 } 
