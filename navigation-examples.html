@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Navigation Examples</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #1e40af;
+      --accent: #f59e0b;
+      --text: #1f2937;
+      --light: #f3f4f6;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Unified Navigation */
+    .unified-nav {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 1rem;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background: var(--light);
+      color: var(--primary);
+    }
+
+    .nav-link.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .menu-button {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+      .menu-button {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+      .nav-link {
+        display: block;
+        padding: 0.75rem 1rem;
+      }
+    }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Unified Navigation -->
+    <nav class="unified-nav">
+      <div class="nav-container">
+        <a href="#" class="nav-brand">Navigation Examples</a>
+        <button class="menu-button">☰</button>
+        <ul class="nav-menu">
+          <li><a href="#" class="nav-link active">Home</a></li>
+          <li><a href="#" class="nav-link">About</a></li>
+          <li><a href="#" class="nav-link">Services</a></li>
+          <li><a href="interview-scheduling.html" class="nav-link">Schedule Interview</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <h1 style="text-align: center; margin: 2rem 0; color: var(--primary);">Navigation Examples</h1>
+
+    <!-- Content sections -->
+    <div class="section">
+      <h2 class="section-title">Welcome to Navigation Examples</h2>
+      <p>This page demonstrates various navigation patterns and styles. The navigation bar above is a unified, mobile-ready navigation that adapts to different screen sizes.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Features</h2>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 1rem;">✓ Mobile-first design</li>
+        <li style="margin-bottom: 1rem;">✓ Sticky navigation</li>
+        <li style="margin-bottom: 1rem;">✓ Smooth transitions</li>
+        <li style="margin-bottom: 1rem;">✓ Responsive layout</li>
+        <li style="margin-bottom: 1rem;">✓ Modern styling</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Mobile Navigation Toggle
+    const navMenu = document.querySelector('.nav-menu');
+    const menuButton = document.querySelector('.menu-button');
+
+    menuButton.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navMenu.contains(e.target) && !menuButton.contains(e.target)) {
+        navMenu.classList.remove('active');
+      }
+    });
+
+    // Set active nav link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html> 

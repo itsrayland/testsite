@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schedule an Interview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #1e40af;
+      --accent: #f59e0b;
+      --text: #1f2937;
+      --light: #f3f4f6;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Unified Navigation */
+    .unified-nav {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 1rem;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background: var(--light);
+      color: var(--primary);
+    }
+
+    .nav-link.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .menu-button {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+      .menu-button {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+      .nav-link {
+        display: block;
+        padding: 0.75rem 1rem;
+      }
+    }
+
+    /* Interview Scheduling Form */
+    .scheduling-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .form-section {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .calendar-section {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid var(--light);
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid var(--light);
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .submit-button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background: var(--secondary);
+    }
+
+    .timezone-selector {
+      margin-bottom: 1.5rem;
+    }
+
+    .timezone-selector select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid var(--light);
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .timezone-selector select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .timezone-info {
+      font-size: 0.875rem;
+      color: var(--text);
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .calendar {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .calendar th,
+    .calendar td {
+      padding: 0.75rem;
+      text-align: center;
+      border: 1px solid var(--light);
+    }
+
+    .calendar th {
+      background: var(--light);
+      font-weight: 500;
+    }
+
+    .calendar td {
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .calendar td:hover {
+      background: var(--light);
+    }
+
+    .calendar td.available {
+      color: var(--success);
+    }
+
+    .calendar td.unavailable {
+      color: var(--danger);
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 768px) {
+      .scheduling-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Unified Navigation -->
+    <nav class="unified-nav">
+      <div class="nav-container">
+        <a href="navigation-examples.html" class="nav-brand">Navigation Examples</a>
+        <button class="menu-button">☰</button>
+        <ul class="nav-menu">
+          <li><a href="navigation-examples.html" class="nav-link">Home</a></li>
+          <li><a href="#" class="nav-link">About</a></li>
+          <li><a href="#" class="nav-link">Services</a></li>
+          <li><a href="interview-scheduling.html" class="nav-link active">Schedule Interview</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <h1 style="text-align: center; margin: 2rem 0; color: var(--primary);">Schedule an Interview</h1>
+
+    <div class="scheduling-container">
+      <!-- Interview Form -->
+      <div class="form-section">
+        <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Interview Details</h2>
+        <form id="interviewForm">
+          <div class="form-group">
+            <label class="form-label" for="name">Full Name</label>
+            <input type="text" id="name" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input type="email" id="email" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number</label>
+            <input type="tel" id="phone" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="position">Position</label>
+            <select id="position" class="form-select" required>
+              <option value="">Select a position</option>
+              <option value="frontend">Frontend Developer</option>
+              <option value="backend">Backend Developer</option>
+              <option value="fullstack">Full Stack Developer</option>
+              <option value="designer">UI/UX Designer</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="date">Preferred Date</label>
+            <input type="date" id="date" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="time">Preferred Time</label>
+            <select id="time" class="form-select" required>
+              <option value="">Select a time slot</option>
+              <option value="9:00">9:00 AM</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="11:00">11:00 AM</option>
+              <option value="14:00">2:00 PM</option>
+              <option value="15:00">3:00 PM</option>
+              <option value="16:00">4:00 PM</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="notes">Additional Notes</label>
+            <textarea id="notes" class="form-input" rows="4"></textarea>
+          </div>
+
+          <button type="submit" class="submit-button">Schedule Interview</button>
+        </form>
+      </div>
+
+      <!-- Calendar Section -->
+      <div class="calendar-section">
+        <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Available Time Slots</h2>
+        
+        <div class="timezone-selector">
+          <label class="form-label" for="timezone">Select Time Zone</label>
+          <select id="timezone" class="form-select">
+            <option value="America/New_York">Eastern Time (ET)</option>
+            <option value="America/Chicago">Central Time (CT)</option>
+            <option value="America/Denver">Mountain Time (MT)</option>
+            <option value="America/Los_Angeles">Pacific Time (PT)</option>
+            <option value="America/Anchorage">Alaska Time (AKT)</option>
+          </select>
+          <div class="timezone-info">All times shown in your selected time zone</div>
+        </div>
+
+        <table class="calendar">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>9:00 AM</td>
+              <td class="available">Available</td>
+              <td class="unavailable">Booked</td>
+              <td class="available">Available</td>
+              <td class="available">Available</td>
+              <td class="unavailable">Booked</td>
+            </tr>
+            <tr>
+              <td>10:00 AM</td>
+              <td class="unavailable">Booked</td>
+              <td class="available">Available</td>
+              <td class="unavailable">Booked</td>
+              <td class="available">Available</td>
+              <td class="available">Available</td>
+            </tr>
+            <tr>
+              <td>11:00 AM</td>
+              <td class="available">Available</td>
+              <td class="available">Available</td>
+              <td class="available">Available</td>
+              <td class="unavailable">Booked</td>
+              <td class="available">Available</td>
+            </tr>
+            <tr>
+              <td>2:00 PM</td>
+              <td class="unavailable">Booked</td>
+              <td class="available">Available</td>
+              <td class="available">Available</td>
+              <td class="available">Available</td>
+              <td class="unavailable">Booked</td>
+            </tr>
+            <tr>
+              <td>3:00 PM</td>
+              <td class="available">Available</td>
+              <td class="unavailable">Booked</td>
+              <td class="available">Available</td>
+              <td class="available">Available</td>
+              <td class="available">Available</td>
+            </tr>
+            <tr>
+              <td>4:00 PM</td>
+              <td class="available">Available</td>
+              <td class="available">Available</td>
+              <td class="unavailable">Booked</td>
+              <td class="available">Available</td>
+              <td class="available">Available</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile Navigation Toggle
+    const navMenu = document.querySelector('.nav-menu');
+    const menuButton = document.querySelector('.menu-button');
+
+    menuButton.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navMenu.contains(e.target) && !menuButton.contains(e.target)) {
+        navMenu.classList.remove('active');
+      }
+    });
+
+    // Form Submission
+    const interviewForm = document.getElementById('interviewForm');
+    interviewForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        position: document.getElementById('position').value,
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        notes: document.getElementById('notes').value
+      };
+
+      // Here you would typically send the data to your backend
+      console.log('Interview scheduled:', formData);
+      alert('Interview scheduled successfully!');
+      interviewForm.reset();
+    });
+
+    // Time Zone Handling
+    const timezoneSelect = document.getElementById('timezone');
+    const timezoneInfo = document.querySelector('.timezone-info');
+
+    function updateTimezoneInfo() {
+      const selectedTimezone = timezoneSelect.value;
+      const timezoneName = timezoneSelect.options[timezoneSelect.selectedIndex].text;
+      timezoneInfo.textContent = `All times shown in ${timezoneName}`;
+    }
+
+    timezoneSelect.addEventListener('change', updateTimezoneInfo);
+    updateTimezoneInfo(); // Initial call
+
+    // Calendar Interaction with Time Zone
+    const calendarCells = document.querySelectorAll('.calendar td.available');
+    calendarCells.forEach(cell => {
+      cell.addEventListener('click', () => {
+        const time = cell.parentElement.firstElementChild.textContent;
+        const day = cell.cellIndex;
+        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+        const selectedTimezone = timezoneSelect.value;
+        
+        document.getElementById('time').value = time;
+        console.log(`Selected: ${days[day-1]} at ${time} ${timezoneSelect.options[timezoneSelect.selectedIndex].text}`);
+      });
+    });
+  </script>
+</body>
+</html> 
