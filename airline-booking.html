@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SkyWings - Book Your Flight</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module">
+    import { searchFlights, createBooking, getAirports } from './airtable-config.js';
+    
+    // Make functions available globally
+    window.searchFlights = searchFlights;
+    window.createBooking = createBooking;
+    window.getAirports = getAirports;
+  </script>
   <style>
     :root {
       --primary: #2563eb;
@@ -228,6 +236,43 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* Add new styles for loading and error states */
+    .loading {
+      position: relative;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      border: 3px solid var(--light);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .error-message {
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -358,21 +403,113 @@
       });
     });
 
-    // Form submission
+    // Form submission with Airtable integration
     const form = document.querySelector('.search-form');
-    form.addEventListener('submit', (e) => {
+    const flightCards = document.querySelector('.flight-cards');
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'error-message';
+    form.parentNode.insertBefore(errorMessage, form);
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // Add your form submission logic here
-      console.log('Search submitted');
+      
+      // Show loading state
+      form.classList.add('loading');
+      errorMessage.classList.remove('show');
+      
+      try {
+        const formData = new FormData(form);
+        const searchParams = {
+          from: formData.get('from'),
+          to: formData.get('to'),
+          date: formData.get('departure'),
+          passengers: formData.get('passengers'),
+          class: formData.get('class')
+        };
+
+        // Search flights using Airtable
+        const flights = await window.searchFlights(searchParams);
+        
+        // Update flight cards
+        flightCards.innerHTML = flights.map(flight => `
+          <div class="flight-card">
+            <div class="flight-header">
+              <span class="airline">${flight.airline}</span>
+              <span class="price">$${flight.price}</span>
+            </div>
+            <div class="flight-details">
+              <div class="flight-time">${flight.departureTime}</div>
+              <div class="flight-duration">${flight.duration}</div>
+              <div class="flight-time">${flight.arrivalTime}</div>
+            </div>
+            <div class="flight-route">
+              <span>${flight.departureAirport}</span>
+              <span>${flight.arrivalAirport}</span>
+            </div>
+            <button class="book-button" data-flight-id="${flight.id}">Book Now</button>
+          </div>
+        `).join('');
+
+        // Add event listeners to new book buttons
+        document.querySelectorAll('.book-button').forEach(button => {
+          button.addEventListener('click', handleBooking);
+        });
+
+      } catch (error) {
+        errorMessage.textContent = 'Error searching flights. Please try again.';
+        errorMessage.classList.add('show');
+      } finally {
+        form.classList.remove('loading');
+      }
     });
 
-    // Book button clicks
-    const bookButtons = document.querySelectorAll('.book-button');
-    bookButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Add your booking logic here
-        console.log('Booking initiated');
-      });
+    // Handle booking
+    async function handleBooking(e) {
+      const button = e.target;
+      const flightId = button.dataset.flightId;
+      
+      button.classList.add('loading');
+      try {
+        const booking = await window.createBooking({
+          flightId,
+          passengerCount: document.querySelector('select[name="passengers"]').value,
+          totalPrice: button.closest('.flight-card').querySelector('.price').textContent
+        });
+
+        // Show success message
+        alert(`Booking confirmed! Your booking ID is: ${booking.bookingId}`);
+        
+      } catch (error) {
+        errorMessage.textContent = 'Error creating booking. Please try again.';
+        errorMessage.classList.add('show');
+      } finally {
+        button.classList.remove('loading');
+      }
+    }
+
+    // Load airports on page load
+    window.addEventListener('load', async () => {
+      try {
+        const airports = await window.getAirports();
+        const fromSelect = document.querySelector('input[name="from"]');
+        const toSelect = document.querySelector('input[name="to"]');
+        
+        // Create datalist for airport autocomplete
+        const datalist = document.createElement('datalist');
+        datalist.id = 'airports';
+        airports.forEach(airport => {
+          const option = document.createElement('option');
+          option.value = `${airport.code} - ${airport.name}`;
+          datalist.appendChild(option);
+        });
+        
+        document.body.appendChild(datalist);
+        fromSelect.setAttribute('list', 'airports');
+        toSelect.setAttribute('list', 'airports');
+        
+      } catch (error) {
+        console.error('Error loading airports:', error);
+      }
     });
   </script>
 </body>
