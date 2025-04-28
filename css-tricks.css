@@ -1,0 +1,206 @@
+/* Navigation Bar */
+.navbar {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.nav-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  color: white;
+}
+
+/* Main Container */
+.tricks-container {
+  max-width: 1200px;
+  margin: 100px auto 0;
+  padding: 2rem;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Trick Sections */
+.trick-section {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(5px);
+}
+
+.trick-section h2 {
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+/* Gradient Text */
+.gradient-text {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 8s ease infinite;
+}
+
+/* Hover Cards */
+.hover-cards {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.hover-card {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hover-card:hover {
+  transform: translateY(-10px) rotate(5deg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Animated Background */
+.animated-bg {
+  height: 200px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+  background-size: 400% 400%;
+  animation: gradientMove 8s ease infinite;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.animated-text {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 3D Cube */
+.cube {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotate 10s infinite linear;
+  margin: 0 auto;
+}
+
+.cube-face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+.front { transform: translateZ(100px); }
+.back { transform: rotateY(180deg) translateZ(100px); }
+.right { transform: rotateY(90deg) translateZ(100px); }
+.left { transform: rotateY(-90deg) translateZ(100px); }
+.top { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+/* Neon Text */
+.neon-text {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 20px #ff6ec4,
+    0 0 30px #ff6ec4,
+    0 0 40px #ff6ec4;
+  animation: neonPulse 1.5s ease-in-out infinite;
+}
+
+/* Code Example */
+.code-example {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+.code-example pre {
+  margin: 0;
+  color: #4ade80;
+  font-family: monospace;
+}
+
+/* Animations */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes rotate {
+  0% { transform: rotateX(0) rotateY(0); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+@keyframes neonPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+} 
