@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="css-tricks.css">
 </head>
 <body>
+  <div class="sparkles-container"></div>
+  
   <nav class="navbar">
     <div class="nav-brand">Ramin & Rays</div>
     <div class="nav-links">
@@ -66,5 +68,56 @@
       <div class="neon-text">Neon Effect</div>
     </section>
   </div>
+
+  <script>
+    // Sparkle effect
+    const sparklesContainer = document.querySelector('.sparkles-container');
+    let lastSparkleTime = 0;
+    const sparkleInterval = 50; // Minimum time between sparkles in milliseconds
+
+    function createSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      
+      // Random sparkle variations
+      const size = Math.random() * 4 + 2;
+      const angle = Math.random() * 360;
+      const duration = Math.random() * 1000 + 500;
+      const distance = Math.random() * 50 + 30;
+      
+      sparkle.style.width = `${size}px`;
+      sparkle.style.height = `${size}px`;
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+      sparkle.style.setProperty('--angle', `${angle}deg`);
+      sparkle.style.animation = `sparkleAnimation ${duration}ms linear forwards`;
+      
+      // Add some randomness to the sparkle position
+      const finalX = x + (Math.random() - 0.5) * distance;
+      const finalY = y + (Math.random() - 0.5) * distance;
+      sparkle.style.transform = `translate(${finalX - x}px, ${finalY - y}px)`;
+      
+      sparklesContainer.appendChild(sparkle);
+      
+      // Remove sparkle after animation
+      setTimeout(() => {
+        sparkle.remove();
+      }, duration);
+    }
+
+    function handleMouseMove(e) {
+      const currentTime = Date.now();
+      if (currentTime - lastSparkleTime > sparkleInterval) {
+        // Create multiple sparkles for each mouse movement
+        for (let i = 0; i < 3; i++) {
+          createSparkle(e.clientX, e.clientY);
+        }
+        lastSparkleTime = currentTime;
+      }
+    }
+
+    // Add mouse move listener
+    document.addEventListener('mousemove', handleMouseMove);
+  </script>
 </body>
 </html> 
