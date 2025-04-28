@@ -46,8 +46,10 @@
 /* Main Container */
 .tricks-container {
   max-width: 1200px;
-  margin: 100px auto 0;
+  margin: 80px auto 0;
   padding: 2rem;
+  min-height: calc(100vh - 80px);
+  overflow-y: auto;
 }
 
 .page-title {
@@ -89,6 +91,7 @@
   display: flex;
   gap: 1rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .hover-card {
@@ -180,12 +183,15 @@
   padding: 1rem;
   border-radius: 10px;
   margin-top: 1rem;
+  overflow-x: auto;
 }
 
 .code-example pre {
   margin: 0;
   color: #4ade80;
   font-family: monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 /* Animations */
@@ -203,4 +209,33 @@
 @keyframes neonPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.8; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tricks-container {
+    padding: 1rem;
+  }
+  
+  .hover-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cube {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .cube-face {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .front { transform: translateZ(75px); }
+  .back { transform: rotateY(180deg) translateZ(75px); }
+  .right { transform: rotateY(90deg) translateZ(75px); }
+  .left { transform: rotateY(-90deg) translateZ(75px); }
+  .top { transform: rotateX(90deg) translateZ(75px); }
+  .bottom { transform: rotateX(-90deg) translateZ(75px); }
 } 
