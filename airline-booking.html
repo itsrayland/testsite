@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SkyWings - Book Your Flight</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #1e40af;
+      --accent: #f59e0b;
+      --text: #1f2937;
+      --light: #f3f4f6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: white;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .search-container {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .search-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .search-tab {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: var(--light);
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .search-tab.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .search-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 0.75rem;
+      border: 2px solid var(--light);
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .search-button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      grid-column: 1 / -1;
+    }
+
+    .search-button:hover {
+      background: var(--secondary);
+    }
+
+    .flight-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .flight-card {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .flight-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .flight-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .airline {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .flight-details {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .flight-time {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .flight-duration {
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+
+    .flight-route {
+      display: flex;
+      justify-content: space-between;
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+
+    .book-button {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .book-button:hover {
+      background: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .search-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .flight-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">SkyWings</div>
+    <div class="nav-links">
+      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Flights</a>
+      <a href="#" class="nav-link">Deals</a>
+      <a href="#" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="search-container">
+      <div class="search-tabs">
+        <button class="search-tab active">One Way</button>
+        <button class="search-tab">Round Trip</button>
+        <button class="search-tab">Multi-City</button>
+      </div>
+      
+      <form class="search-form">
+        <div class="form-group">
+          <label>From</label>
+          <input type="text" placeholder="City or Airport">
+        </div>
+        
+        <div class="form-group">
+          <label>To</label>
+          <input type="text" placeholder="City or Airport">
+        </div>
+        
+        <div class="form-group">
+          <label>Departure</label>
+          <input type="date">
+        </div>
+        
+        <div class="form-group">
+          <label>Return</label>
+          <input type="date">
+        </div>
+        
+        <div class="form-group">
+          <label>Passengers</label>
+          <select>
+            <option>1 Adult</option>
+            <option>2 Adults</option>
+            <option>2 Adults, 1 Child</option>
+            <option>2 Adults, 2 Children</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Class</label>
+          <select>
+            <option>Economy</option>
+            <option>Premium Economy</option>
+            <option>Business</option>
+            <option>First</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="search-button">Search Flights</button>
+      </form>
+    </div>
+
+    <div class="flight-cards">
+      <div class="flight-card">
+        <div class="flight-header">
+          <span class="airline">SkyWings</span>
+          <span class="price">$299</span>
+        </div>
+        <div class="flight-details">
+          <div class="flight-time">10:00 AM</div>
+          <div class="flight-duration">2h 30m</div>
+          <div class="flight-time">12:30 PM</div>
+        </div>
+        <div class="flight-route">
+          <span>New York (JFK)</span>
+          <span>London (LHR)</span>
+        </div>
+        <button class="book-button">Book Now</button>
+      </div>
+
+      <div class="flight-card">
+        <div class="flight-header">
+          <span class="airline">SkyWings</span>
+          <span class="price">$349</span>
+        </div>
+        <div class="flight-details">
+          <div class="flight-time">2:15 PM</div>
+          <div class="flight-duration">2h 45m</div>
+          <div class="flight-time">5:00 PM</div>
+        </div>
+        <div class="flight-route">
+          <span>New York (JFK)</span>
+          <span>London (LHR)</span>
+        </div>
+        <button class="book-button">Book Now</button>
+      </div>
+
+      <div class="flight-card">
+        <div class="flight-header">
+          <span class="airline">SkyWings</span>
+          <span class="price">$399</span>
+        </div>
+        <div class="flight-details">
+          <div class="flight-time">6:30 PM</div>
+          <div class="flight-duration">2h 30m</div>
+          <div class="flight-time">9:00 PM</div>
+        </div>
+        <div class="flight-route">
+          <span>New York (JFK)</span>
+          <span>London (LHR)</span>
+        </div>
+        <button class="book-button">Book Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    const tabs = document.querySelectorAll('.search-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+
+    // Form submission
+    const form = document.querySelector('.search-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Add your form submission logic here
+      console.log('Search submitted');
+    });
+
+    // Book button clicks
+    const bookButtons = document.querySelectorAll('.book-button');
+    bookButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Add your booking logic here
+        console.log('Booking initiated');
+      });
+    });
+  </script>
+</body>
+</html> 
