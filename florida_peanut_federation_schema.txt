@@ -1,0 +1,365 @@
+🧬 Airtable Schema Report
+Base Name: Florida Peanut Federation
+Base ID: appYzntwtzcdJXB7a
+
+🗂️ Table: PROFILES
+- Table ID: tblfz4dmEISWOB67I
+- Total Fields: 25
+
+- **Last** (singleLineText)
+  - Field ID: fldI5DznJpswh4LiE
+
+- **Organization** (singleLineText)
+  - Field ID: fldb143BQrfBiHfKi
+
+- **Connected Group** (singleLineText)
+  - Field ID: fldSXmuRh3TZyKwqQ
+
+- **Address** (singleLineText)
+  - Field ID: fldy4JnEg0XhdWKdx
+
+- **City** (singleLineText)
+  - Field ID: fldHOVStcvL2L2mhl
+
+- **State** (singleLineText)
+  - Field ID: fld9RdIlpgV7CU9LJ
+
+- **Zip** (singleLineText)
+  - Field ID: fldbFez1K6gizRa6P
+
+- **Phone Office** (singleLineText)
+  - Field ID: fld9Dwbsf09wLbEg8
+
+- **Phone Cell** (singleLineText)
+  - Field ID: fldBwKB6VHjB4C8yP
+
+- **Email** (singleLineText)
+  - Field ID: fldu6cu7RKQdJAfOU
+
+- **County** (singleLineText)
+  - Field ID: fldxOBMuzHyONU9EH
+
+- **Additional Address** (singleLineText)
+  - Field ID: fld48KMAvg3omZA5s
+
+- **Data Entry Details** (singleLineText)
+  - Field ID: fldrX8tQWRPop624k
+
+- **Member Number** (number)
+  - Field ID: fldGHwXpSWEEFp2af
+
+- **Category** (singleSelect)
+  - Field ID: fldeZjsxB5eDFSu0s
+  - Options: [Allied Business Member, Charter Farmer Member, Associate Farmer Member, Golden Seed Member, Complimentary, Educational Partner, Industry / Extension, Local Community VIP, Prospective Member, Charter Member, Admin, FARM ROOTS, Extention, Madison, Marion, Gilchrist, Alachua, Polk, Golden Seed, Allied Member, Education, Prospect, Local Community, Industry, Extension, Farm Roots, Media, PB Recipient, NEW, Federal Staff]
+
+- **2025 Membership** (singleLineText)
+  - Field ID: fldGA9aa7f0agmok7
+
+- **Position** (singleLineText)
+  - Field ID: fldS1xfajrrpHR8pI
+
+- **2025 Membership Confirmed** (singleSelect)
+  - Field ID: fldXTgwPEk2swsm3v
+  - Options: [Charter Member PAID, Charter Member SPONSOR, Charter Member, Golden Seed Member, Golden Seed Member PAID]
+
+- **Membership inc with Sponsorship** (singleLineText)
+  - Field ID: fldJqBChpg8iTw8aC
+
+- **First** (singleLineText)
+  - Field ID: fldVO9SQUiJYkNh5K
+
+- **Profile Code** (singleLineText)
+  - Field ID: fldZi6N3cf2JK7vad
+
+- **XXX >>>** (singleLineText)
+  - Field ID: fldU4zruv205KxOXB
+
+- **Sal** (singleLineText)
+  - Field ID: fldXXKL8Oh3EzgDqw
+
+- **Inactive** (checkbox)
+  - Field ID: fldmBmiktFRQBkrqo
+
+- **DONATIONS** (multipleRecordLinks)
+  - Field ID: fldNy1uftVmrT3TS2
+  - Linked to: **DONATIONS** (Table ID: tblisZefBCUMSPnSY)
+
+🔗 Linked Record Fields in Table: 1
+
+🗂️ Table: DONATIONS
+- Table ID: tblisZefBCUMSPnSY
+- Total Fields: 23
+
+- **Name** (singleLineText)
+  - Field ID: fldkAiNV7Z1D1AAW0
+
+- **Primary Contact Name** (singleLineText)
+  - Field ID: fldoBTHerAmPAAbwn
+
+- **Cell Phone** (singleLineText)
+  - Field ID: fldppipQX7FrPI0tI
+
+- **Additional Contact Name** (singleLineText)
+  - Field ID: fldBQcKkRbGXUX4Yc
+
+- **Distribution Schedule** (singleLineText)
+  - Field ID: fldJg2Acjuzs011DU
+
+- **Distribution Volume** (singleLineText)
+  - Field ID: fldpT3kL8kYz55cI4
+
+- **Distribution Requirements** (singleLineText)
+  - Field ID: fldRjjzOhVn2fN72l
+
+- **Distribution Regulations** (singleLineText)
+  - Field ID: fldxieyqB5rc8zWOX
+
+- **Focus Demographics** (singleLineText)
+  - Field ID: fldNk68nusFLiymZ0
+
+- **Add'l Contact Email** (singleLineText)
+  - Field ID: fldzRLjQhj9xILP2o
+
+- **Add'l Contact Phone** (singleLineText)
+  - Field ID: fldkUDa0HIpPz2c1K
+
+- **Email Address** (singleLineText)
+  - Field ID: fldHlOXdjRFLvHI8o
+
+- **Date** (date)
+  - Field ID: fldBGwysPPMkKfN00
+
+- **FPF PB Donation #Jars** (number)
+  - Field ID: fldreFeN63KEITljw
+
+- **FPF PB Donation #Cases** (number)
+  - Field ID: fldBUlViNyJxNHFd6
+
+- **Base Location** (singleLineText)
+  - Field ID: fld3FbdI96oHC0GfH
+
+- **Program Name** (singleLineText)
+  - Field ID: fldphSzLg5qOCnA7E
+
+- **Program Type** (singleSelect)
+  - Field ID: flddK8HJngUe9S3tO
+  - Options: [Student Backpack Program, Community Food Bank/Pantry, Church Food Bank/Pantry]
+
+- **Notes** (singleLineText)
+  - Field ID: fldxVIBdMHxHPhuuJ
+
+- **P/U or D/O** (singleSelect)
+  - Field ID: fldVNuAS82o87RskK
+  - Options: [Self Pickup, Delivered]
+
+- **Status** (singleSelect)
+  - Field ID: fldWtcF7Sotf5O6am
+  - Options: [STANDING, Scheduled, Competed, Planning]
+
+- **Profile** (multipleRecordLinks)
+  - Field ID: fldGsy75ibE5kSA1G
+  - Linked to: **PROFILES** (Table ID: tblfz4dmEISWOB67I)
+
+- **Pallet** (formula)
+  - Field ID: fldMtET5Bkitc5zfi
+
+🔗 Linked Record Fields in Table: 1
+
+🗂️ Table: Activities
+- Table ID: tblnFojNQrXVIyGMq
+- Total Fields: 46
+
+- **START** (date)
+  - Field ID: fldr2AJ2gj5CZ1mDh
+
+- **TITLE** (multilineText)
+  - Field ID: fldB9aejJCLbjIMTo
+
+- **FOCUS** (multipleSelects)
+  - Field ID: fld4ggFg7UaG19OdH
+  - Options: [Industry, Consumer]
+
+- **FORMAT** (multipleSelects)
+  - Field ID: fldEyZ5vAQqhRpTj3
+  - Options: [Mailout, Distribute - PB, Print, Donation, Program, Booth, Sponsor, Presentation, Website Download, Youtube Video, School Program, Student Contests, Meeting, Press Release, Tent, Trailer, Social Media, Materials Provided, Promo Items Provided, Peanut Products Provided, FPF Host, Goodie Bag, Visual Element]
+
+- **PARTNERSHIP** (multipleSelects)
+  - Field ID: fldHjK7usWyx9IPhP
+  - Options: [NACAA, UF/Florida4-H, Florida Farm Bureau, Schools, Publix, FAMU, FPPA, UF IFAS, Many, YES, TBD, Specific FPF Supporter/Member, Chiefland High School, Northeast Florida Fair, Peanut Farmers, Florida Ag in the Classroom, Valdosta Rotary Club, Suwannee River Water Management District, FACAA, Partnership for Strong Families, Promised Land Family Ministries, Ag2040/2070, Branford FFA, Old Town Elementary Jr BETA, NFREC, Feeding Florida, FDACS, USDA, Nutrien, FL FFA chapters, SRWMD, Citrus County Blessings, Governmental Leaders, Peanut Trade Organizations, Williston Chamber of Commerce, Florida State Fair]
+
+- **REACH LOCALE** (singleSelect)
+  - Field ID: fldgR6BBLYtWFkR8A
+  - Options: [Worldwide, Nationwide, Florida, FL Peanut Grow Region, Location Specific, 3/31/25]
+
+- **AUDIENCE** (multipleSelects)
+  - Field ID: fldDDjrtfdbHfgVik
+  - Options: [Adults, Students - Elementary, Students - Middle, Student - High, College, Seniors, Families, All People, Other]
+
+- **REACH: ACTUAL** (number)
+  - Field ID: fld6gzBm0Ag9ipVpE
+
+- **TOTAL COST** (currency)
+  - Field ID: fld1raCsTPAdxvdS5
+
+- **TAGS** (multipleSelects)
+  - Field ID: fldiQj7eQu4IF1B5h
+  - Options: [PEP, PB Donation, Elementary ED, Middle School ED, High School ED, STEAM, STEM, 4H, FFA, Tour, Online/Virtual, Field-trip, Training, Recipes, Food Safety, Allergen Aware, Sponsorship, Community]
+
+- **24-25** (multipleSelects)
+  - Field ID: fldzMe2T0szHyzjJ7
+  - Options: [Hopefully, No, Maybe, Committed, Completed]
+
+- **END** (date)
+  - Field ID: flduTkje98TQYboTo
+
+- **BRIEF OVERVIEW** (multilineText)
+  - Field ID: fldRF3U0ckmftmyxc
+
+- **PROMO ITEMS PROVIDED: ANTICIPATED** (multipleSelects)
+  - Field ID: fldO5I9xsG0wRYD2H
+  - Options: [Pens, Bottle Openers, Pencils, N/A, Vehicle Tags, FPF Caps, Shirts, FPF Beanies, Key Chains]
+
+- **PACKS OF PEANUTS: ANTICIPATED** (number)
+  - Field ID: fldKh1kEw6Ef3R0e0
+
+- **CANS OF PEANUTS: ANTICIPATED** (number)
+  - Field ID: fldL2PWIe1ftcDN4z
+
+- **JARS OF PEANUT BUTTER: ANTICIPATED** (number)
+  - Field ID: fldBtCvQSHDOVa5C4
+
+- **BUDGET** (currency)
+  - Field ID: fldUWZCY4j22h3cUD
+
+- **FOOD STUFFS PROVIDED: ANTICIPATED** (multipleSelects)
+  - Field ID: fldKA5RVAMh50SXaO
+  - Options: [Trail Mix, Custom Peanut Sugar Cookies, Peanut Butter Cookies, Dessert, Light Refreshments, Meal, Other, N/A, Peanut Candy, variety, Peanut Granola/Bfast Bar, Peanuts]
+
+- **CORE PROGRAM** (multipleSelects)
+  - Field ID: fld1zZ8hn3ugPch13
+  - Options: [Advocacy, Philanthropy, Promotion, Education, Partnerships]
+
+- **Completed** (singleSelect)
+  - Field ID: fldZDzxDRxcA7ChOK
+  - Options: [Yes, No]
+
+- **LOCATION** (singleLineText)
+  - Field ID: fldwjEVNNDFnv8sBO
+
+- **ACTIVITY NUMBER** (autoNumber)
+  - Field ID: fldKhZD51Ut5weh6W
+
+- **RECURRENT** (multipleSelects)
+  - Field ID: fldRLyPfvhNA16hNK
+  - Options: [New Project, Annual, Monthly, Quarterly, As Scheduled, As Requested]
+
+- **# PROMO ITEMS PROVIDED: ANTICIPATED** (number)
+  - Field ID: fldEtUXVTwGYBOO99
+
+- **PROMO ITEMS PROVIDED: ACTUAL** (multipleSelects)
+  - Field ID: fld5rP0XosKvTF9SV
+  - Options: [Pens, Pencils, Bottle Openers, Vehicle Tag, FPF Caps, FPF Beanies, Key Chains, FPF Shirts, Other]
+
+- **# PROMO ITEMS PROVIDED: ACTUAL** (number)
+  - Field ID: fldN1uZr1EYmVEBT0
+
+- **FOOD STUFFS PROVIDED: ACTUAL** (multipleSelects)
+  - Field ID: fldCC0mNlzBZDJyRZ
+  - Options: [Trail Mix, Custom Peanut Sugar Cookies, Peanut Butter Cookies, Dessert, Light Refreshments, Meal, Other, Peanut Candy, variety, Peanuts]
+
+- **PACKS OF PEANUTS: ACTUAL** (number)
+  - Field ID: fldBRyZe6gyw5MIem
+
+- **CANS OF PEANUTS: ACTUAL** (number)
+  - Field ID: fldi90lzs7Fa8muA1
+
+- **JARS OF PEANUT BUTTER: ACTUAL** (number)
+  - Field ID: fldFX5dpdawvh4X6f
+
+- **Border** (multipleAttachments)
+  - Field ID: fldT5SBEIP18kRO15
+
+- **MEMO** (multilineText)
+  - Field ID: fldtBiLoeLKs2QHZR
+
+- **COST PER PERSON: ANTICIPATED** (formula)
+  - Field ID: fldKsfGjbJxGBigLc
+
+- **COST PER PERSON: ACTUAL** (formula)
+  - Field ID: fldBxo2aaRRJwpu3r
+
+- **Updated** (lastModifiedTime)
+  - Field ID: fldNxc2ScpSPhg7do
+
+- **Materials Provided: Anticipated** (number)
+  - Field ID: fld3Zm6j1cVk9lzUe
+
+- **Materials Provided: Actual** (number)
+  - Field ID: fldXn1AAY62u5K6Gw
+
+- **REACH: ANTICIPATED** (number)
+  - Field ID: fldZE0ItLPoIldV9D
+
+- **PROJECT COMPONENTS** (multilineText)
+  - Field ID: fldoAHBqwDYfZlGjw
+
+- **Photo 1** (multipleAttachments)
+  - Field ID: fldcQ4OYmlFBSax0r
+
+- **Photo 2** (multipleAttachments)
+  - Field ID: fldcgcHMGScKPDPKI
+
+- **Photo 3** (multipleAttachments)
+  - Field ID: fldjbICAx8MWaRAYp
+
+- **NUMBER OF PARTNERS** (number)
+  - Field ID: fldEEuZRisO5nYcBv
+
+- **YYYYMM** (formula)
+  - Field ID: fldI1jkdCk9SNHnjL
+
+- **QQ** (formula)
+  - Field ID: fldE4Pw7mn08EKWsc
+
+🔗 Linked Record Fields in Table: 0
+
+🗂️ Table: 2020-2021 FPF MOA All QUARTERS
+- Table ID: tbl9odWWCoj7GFd6W
+- Total Fields: 38
+
+[Historical quarterly data fields omitted for brevity]
+
+🗂️ Table: 2021-2022 FPF MOA ALL QUARTERS
+- Table ID: tblYvKqkpHmD4YKfx
+- Total Fields: 42
+
+[Historical quarterly data fields omitted for brevity]
+
+🗂️ Table: 2022-2023 FPF MOA ALL QUARTERS
+- Table ID: tbl3KnCogbHP4NkUg
+- Total Fields: 44
+
+[Historical quarterly data fields omitted for brevity]
+
+🗂️ Table: SPONSORS
+- Table ID: tblzxSQqAmBHvLcBU
+- Total Fields: 33
+
+[Sponsor fields omitted for brevity]
+
+🗂️ Table: 2/22/25 Annual Meeting RSVP (*dbl ck Sponsors)
+- Table ID: tblrN2BuvQ2Yvyh2n
+- Total Fields: 5
+
+[RSVP fields omitted for brevity]
+
+🗂️ Table: Peanut Research (2015+)
+- Table ID: tblbqMZtZ4XXJgNCh
+- Total Fields: 24
+
+[Research fields omitted for brevity]
+
+🧾 Database Summary
+Total Tables: 9
+Total Fields Across All Tables: 280
+Total Linked Record Fields: 2 

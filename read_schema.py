@@ -1,18 +1,16 @@
 import requests
 import json
-
-# Airtable API configuration
-AIRTABLE_PAT = "patWHuF2gFQ21OC7T.e9547c1767d09023fe68ab84daeb70ffc07aa5327458b55a7a17bfad6ebde39d"
-BASE_ID = "appsCxfQMU3zteRBo"
-BASE_URL = f"https://api.airtable.com/v0/meta/bases/{BASE_ID}/tables"
+from airtable_config import AIRTABLE_CONFIG
 
 def read_schema():
     headers = {
-        "Authorization": f"Bearer {AIRTABLE_PAT}",
+        "Authorization": f"Bearer {AIRTABLE_CONFIG['PAT']}",
         "Content-Type": "application/json"
     }
     
-    response = requests.get(BASE_URL, headers=headers)
+    # Get base schema
+    base_url = f"https://api.airtable.com/v0/meta/bases/{AIRTABLE_CONFIG['BASE_ID']}/tables"
+    response = requests.get(base_url, headers=headers)
     
     if response.status_code == 200:
         data = response.json()
@@ -27,37 +25,26 @@ def read_schema():
             print("-------")
             
             for field in table.get('fields', []):
-                field_type = field['type']
-                field_name = field['name']
-                field_id = field['id']
+                print(f"\n{field['name']} ({field['type']})")
+                print(f"  - Field ID: {field['id']}")
                 
-                # Handle different field types
-                if field_type == 'singleSelect':
-                    choices = [choice['name'] for choice in field['options']['choices']]
-                    print(f"  - {field_name} ({field_type})")
-                    print(f"    ID: {field_id}")
-                    print(f"    Options: {', '.join(choices)}")
-                elif field_type == 'multipleSelect':
-                    choices = [choice['name'] for choice in field['options']['choices']]
-                    print(f"  - {field_name} ({field_type})")
-                    print(f"    ID: {field_id}")
-                    print(f"    Options: {', '.join(choices)}")
-                else:
-                    print(f"  - {field_name} ({field_type})")
-                    print(f"    ID: {field_id}")
+                # Print options for select fields
+                if field['type'] in ['singleSelect', 'multipleSelects']:
+                    options = field.get('options', {}).get('choices', [])
+                    if options:
+                        print("  - Options:")
+                        for option in options:
+                            print(f"    → {option['name']}")
                 
-                if 'description' in field:
-                    print(f"    Description: {field['description']}")
-                print()
+                # Print linked table info for linked fields
+                if field['type'] in ['multipleRecordLinks', 'singleRecordLink']:
+                    linked_table = field.get('options', {}).get('linkedTableId')
+                    if linked_table:
+                        print(f"  - Linked to: {linked_table}")
             
-            print("Views:")
-            print("------")
-            for view in table.get('views', []):
-                print(f"  - {view['name']} ({view['type']})")
-                print(f"    ID: {view['id']}")
-            print("\n" + "="*50)
+            print("\n-------------------")
     else:
-        print(f"Error reading schema: {response.status_code}")
+        print(f"Error fetching schema: {response.status_code}")
         print(response.text)
 
 if __name__ == "__main__":

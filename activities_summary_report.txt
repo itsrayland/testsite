@@ -1,0 +1,125 @@
+ACTIVITIES SUMMARY REPORT
+==================================================
+
+1. YEARLY OVERVIEW
+------------------------------
+
+2024:
+  Total Activities: 224
+  Total Reach: 1,193,745
+  Total Cost: $7,655.00
+  Total Peanut Packs: 5,380
+  Total Peanut Cans: 27
+  Total PB Jars: 30,343
+  Average Cost per Activity: $34.17
+  Average Reach per Activity: 5,329
+
+2025:
+  Total Activities: 177
+  Total Reach: 1,005,979
+  Total Cost: $6,327.00
+  Total Peanut Packs: 2
+  Total Peanut Cans: 37
+  Total PB Jars: 29
+  Average Cost per Activity: $35.75
+  Average Reach per Activity: 5,683
+
+
+2. QUARTERLY TRENDS
+------------------------------
+
+2024-Q3:
+  Total Activities: 88
+  Total Reach: 594,222
+  Total Cost: $5,705.00
+  Average Cost per Activity: $64.83
+  Average Reach per Activity: 6,753
+
+2024-Q4:
+  Total Activities: 136
+  Total Reach: 599,523
+  Total Cost: $1,950.00
+  Average Cost per Activity: $14.34
+  Average Reach per Activity: 4,408
+
+2025-Q1:
+  Total Activities: 112
+  Total Reach: 1,005,849
+  Total Cost: $6,250.00
+  Average Cost per Activity: $55.80
+  Average Reach per Activity: 8,981
+
+2025-Q2:
+  Total Activities: 65
+  Total Reach: 130
+  Total Cost: $77.00
+  Average Cost per Activity: $1.18
+  Average Reach per Activity: 2
+
+
+3. PROGRAM ANALYSIS
+------------------------------
+
+Advocacy:
+  Total Activities: 401
+  Total Reach: 2,199,724
+  Total Cost: $13,982.00
+  Average Cost per Activity: $34.87
+  Average Reach per Activity: 5,486
+
+Education:
+  Total Activities: 401
+  Total Reach: 2,199,724
+  Total Cost: $13,982.00
+  Average Cost per Activity: $34.87
+  Average Reach per Activity: 5,486
+
+Partnerships:
+  Total Activities: 401
+  Total Reach: 2,199,724
+  Total Cost: $13,982.00
+  Average Cost per Activity: $34.87
+  Average Reach per Activity: 5,486
+
+Philanthropy:
+  Total Activities: 401
+  Total Reach: 2,199,724
+  Total Cost: $13,982.00
+  Average Cost per Activity: $34.87
+  Average Reach per Activity: 5,486
+
+Promotion:
+  Total Activities: 401
+  Total Reach: 2,199,724
+  Total Cost: $13,982.00
+  Average Cost per Activity: $34.87
+  Average Reach per Activity: 5,486
+
+
+4. FOCUS AREA ANALYSIS
+------------------------------
+
+Consumer:
+  Total Activities: 401
+  Total Reach: 2,199,724
+  Total Cost: $13,982.00
+  Average Cost per Activity: $34.87
+  Average Reach per Activity: 5,486
+
+Industry:
+  Total Activities: 401
+  Total Reach: 2,199,724
+  Total Cost: $13,982.00
+  Average Cost per Activity: $34.87
+  Average Reach per Activity: 5,486
+
+
+5. KEY INSIGHTS
+------------------------------
+
+Most Active Program: Promotion with 401 activities
+Most Cost-Effective Program: Promotion at $34.87 per activity
+Highest Reach Program: Promotion with 5,486 average reach per activity
+
+Busiest Quarter: 2024-Q4 with 136 activities
+Most Expensive Quarter: 2025-Q1 with $6,250.00 total cost
