@@ -16,17 +16,20 @@ A modern web interface for managing Airtable bases. This interface provides a us
 ## Setup
 
 1. Clone this repository
-2. Open `airtable-manager.html` in a web browser
-3. The interface will automatically connect to your Airtable base using the configured API key
+2. Copy `airtable-config.template.js` to `airtable-config.js`
+3. Edit `airtable-config.js` and add your Airtable credentials:
+   ```javascript
+   const AIRTABLE_CONFIG = {
+       PAT: "your_personal_access_token_here",
+       BASE_ID: "your_base_id_here"
+   };
+   ```
+4. Open `airtable-manager.html` in a web browser
+5. The interface will automatically connect to your Airtable base using your configured credentials
 
-## Configuration
+## Security Note
 
-The Airtable API configuration is set in the JavaScript code:
-
-```javascript
-const AIRTABLE_PAT = "your_personal_access_token";
-const BASE_ID = "your_base_id";
-```
+The `airtable-config.js` file contains sensitive credentials and is excluded from Git via `.gitignore`. Never commit this file to version control.
 
 ## Usage
 
