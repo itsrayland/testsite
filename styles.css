@@ -22,14 +22,33 @@ body {
   width: 90%;
   max-width: 800px;
   height: 80vh;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 0 30px rgba(0, 150, 255, 0.3);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 0 40px rgba(64, 224, 208, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 20px;
-  border: 3px solid rgba(30, 144, 255, 0.2);
+  border: 4px solid rgba(64, 224, 208, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #FF6347, #FFA500, #FFD700, #40E0D0, #20B2AA);
+  background-size: 200% 100%;
+  animation: beachShimmer 3s linear infinite;
+}
+
+@keyframes beachShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 .score-board {
@@ -252,6 +271,21 @@ p {
   }
   100% {
     transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes collectEffect {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-30px) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-60px) scale(0.8);
     opacity: 0;
   }
 }

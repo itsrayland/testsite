@@ -3,44 +3,51 @@ class BeachTreasureGame {
     this.score = 0;
     this.timeLeft = 60;
     this.gameActive = false;
-    this.treasureCount = 15; // Reduced count since treasures are bigger
-    this.beachScene = document.getElementById('nightSky'); // Keeping the same ID for compatibility
+    this.treasureCount = 12; // Beach treasures are more valuable
+    this.beachScene = document.getElementById('nightSky'); // Beach scene container
     this.scoreElement = document.getElementById('score');
     this.timerElement = document.getElementById('timer');
     this.startButton = document.getElementById('startGame');
+    this.treasureTypes = ['🐚', '🦀', '⭐', '💎', '🏆', '🌊', '🏝️', '☀️', '🐠', '🦑'];
+    this.collectedTreasures = [];
     
-    this.startButton.addEventListener('click', () => this.startGame());
+    this.startButton.addEventListener('click', () => this.startBeachHunt());
   }
 
-  startGame() {
+  startBeachHunt() {
     if (this.gameActive) return;
     
     this.gameActive = true;
     this.score = 0;
     this.timeLeft = 60;
+    this.collectedTreasures = [];
     this.updateScore();
-    this.startButton.textContent = '🌊 Beach Hunt in Progress!';
+    this.startButton.textContent = '🌊 Beach Hunt in Progress! 🏖️';
     this.startButton.disabled = true;
     
-    this.generateTreasures();
-    this.startTimer();
+    this.generateBeachTreasures();
+    this.startBeachTimer();
   }
 
-  generateTreasures() {
+  generateBeachTreasures() {
     this.beachScene.innerHTML = '';
     
-    // Add some beach ambience elements
+    // Add beach ambience and environment
     this.addBeachAmbience();
     
     for (let i = 0; i < this.treasureCount; i++) {
       const treasure = document.createElement('div');
-      treasure.className = 'star'; // Keeping the same class for CSS compatibility
-      treasure.style.left = `${Math.random() * 95}%`;
-      treasure.style.top = `${Math.random() * 90}%`;
-      treasure.style.animationDelay = `${Math.random() * 3}s`;
-      treasure.style.animationDuration = `${12 + Math.random() * 8}s`; // Random duration between 12-20s
+      treasure.className = 'star'; // Beach treasure styling
+      treasure.style.left = `${Math.random() * 92}%`;
+      treasure.style.top = `${Math.random() * 88}%`;
+      treasure.style.animationDelay = `${Math.random() * 4}s`;
+      treasure.style.animationDuration = `${15 + Math.random() * 10}s`; // Slower, more graceful movement
       
-      treasure.addEventListener('click', () => this.collectTreasure(treasure));
+      // Add treasure type data for scoring variety
+      treasure.dataset.treasureType = this.treasureTypes[Math.floor(Math.random() * this.treasureTypes.length)];
+      treasure.dataset.points = Math.floor(Math.random() * 3) + 1; // 1-3 points per treasure
+      
+      treasure.addEventListener('click', () => this.collectBeachTreasure(treasure));
       this.beachScene.appendChild(treasure);
     }
   }
@@ -64,61 +71,104 @@ class BeachTreasureGame {
     }
   }
 
-  collectTreasure(treasure) {
+  collectBeachTreasure(treasure) {
     if (!this.gameActive) return;
     
+    // Get treasure info
+    const treasureType = treasure.dataset.treasureType;
+    const points = parseInt(treasure.dataset.points);
+    
+    // Add to collected treasures
+    this.collectedTreasures.push(treasureType);
+    
+    // Create collection effect
+    this.createCollectionEffect(treasure, treasureType, points);
+    
     treasure.remove();
-    this.score++;
+    this.score += points;
     this.updateScore();
     
-    // Generate a new treasure
+    // Generate a new beach treasure
     const newTreasure = document.createElement('div');
-    newTreasure.className = 'star'; // Keeping the same class for CSS compatibility
-    newTreasure.style.left = `${Math.random() * 100}%`;
-    newTreasure.style.top = `${Math.random() * 100}%`;
+    newTreasure.className = 'star'; // Beach treasure styling
+    newTreasure.style.left = `${Math.random() * 92}%`;
+    newTreasure.style.top = `${Math.random() * 88}%`;
     newTreasure.style.animationDelay = `${Math.random() * 2}s`;
-    newTreasure.style.animationDuration = `${10 + Math.random() * 10}s`; // Random duration between 10-20s
-    newTreasure.addEventListener('click', () => this.collectTreasure(newTreasure));
+    newTreasure.style.animationDuration = `${15 + Math.random() * 10}s`;
+    
+    newTreasure.dataset.treasureType = this.treasureTypes[Math.floor(Math.random() * this.treasureTypes.length)];
+    newTreasure.dataset.points = Math.floor(Math.random() * 3) + 1;
+    
+    newTreasure.addEventListener('click', () => this.collectBeachTreasure(newTreasure));
     this.beachScene.appendChild(newTreasure);
+  }
+
+  createCollectionEffect(treasure, treasureType, points) {
+    const effect = document.createElement('div');
+    effect.style.cssText = `
+      position: absolute;
+      left: ${treasure.style.left};
+      top: ${treasure.style.top};
+      pointer-events: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: #FFD700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      animation: collectEffect 1s ease-out forwards;
+      z-index: 1000;
+    `;
+    effect.textContent = `${treasureType} +${points}`;
+    this.beachScene.appendChild(effect);
+    
+    setTimeout(() => effect.remove(), 1000);
   }
 
   updateScore() {
     this.scoreElement.textContent = this.score;
   }
 
-  startTimer() {
+  startBeachTimer() {
     const timer = setInterval(() => {
       this.timeLeft--;
       this.timerElement.textContent = this.timeLeft;
       
       if (this.timeLeft <= 0) {
         clearInterval(timer);
-        this.endGame();
+        this.endBeachHunt();
       }
     }, 1000);
   }
 
-  endGame() {
+  endBeachHunt() {
     this.gameActive = false;
-    this.startButton.textContent = '🏖️ Start New Beach Hunt!';
+    this.startButton.textContent = '🏖️ Start New Beach Adventure!';
     this.startButton.disabled = false;
     
-    // Show final score with beach theme
-    const treasureTypes = ['🐚', '⭐', '💎', '🏆', '🦀', '🌊', '🏝️', '☀️'];
-    const randomTreasure = treasureTypes[Math.floor(Math.random() * treasureTypes.length)];
-    const randomTreasure2 = treasureTypes[Math.floor(Math.random() * treasureTypes.length)];
+    // Calculate unique treasures collected
+    const uniqueTreasures = [...new Set(this.collectedTreasures)];
+    const totalTreasures = this.collectedTreasures.length;
     
-    let message = `🏖️ Beach Hunt Complete! ${randomTreasure}\n\n`;
-    message += `🐚 Treasures Found: ${this.score}\n`;
+    // Show comprehensive beach-themed results
+    let message = `🏖️ Beach Treasure Hunt Complete! 🌊\n\n`;
+    message += `🐚 Total Score: ${this.score} points\n`;
+    message += `🏆 Treasures Collected: ${totalTreasures}\n`;
+    message += `✨ Unique Types Found: ${uniqueTreasures.length}/10\n\n`;
     
-    if (this.score >= 50) {
-      message += `🏆 AMAZING! You're a Beach Treasure Master! ${randomTreasure2}`;
-    } else if (this.score >= 30) {
-      message += `🌟 Excellent treasure hunting skills! ${randomTreasure2}`;
+    if (uniqueTreasures.length > 0) {
+      message += `� Your Beach Collection: ${uniqueTreasures.join(' ')}\n\n`;
+    }
+    
+    // Beach achievement rankings
+    if (this.score >= 60) {
+      message += `🏆 LEGENDARY! Beach Treasure Master! 🌟\nYou've become one with the ocean! 🌊`;
+    } else if (this.score >= 40) {
+      message += `🥇 AMAZING! Expert Beach Explorer! ⭐\nThe sea reveals its secrets to you! 🐚`;
+    } else if (this.score >= 25) {
+      message += `🥈 GREAT! Skilled Treasure Hunter! 💎\nYou have a keen eye for beach treasures! 🔍`;
     } else if (this.score >= 15) {
-      message += `🌊 Good work, beach explorer! ${randomTreasure2}`;
+      message += `🥉 GOOD! Beach Adventure Novice! 🌊\nYou're getting the hang of treasure hunting! 🏖️`;
     } else {
-      message += `🏖️ Keep practicing your treasure hunting! ${randomTreasure2}`;
+      message += `🏖️ Keep exploring the beach paradise! ☀️\nEvery treasure hunter started somewhere! 🐚`;
     }
     
     alert(message);
