@@ -28,16 +28,39 @@ class BeachTreasureGame {
 
   generateTreasures() {
     this.beachScene.innerHTML = '';
+    
+    // Add some beach ambience elements
+    this.addBeachAmbience();
+    
     for (let i = 0; i < this.treasureCount; i++) {
       const treasure = document.createElement('div');
       treasure.className = 'star'; // Keeping the same class for CSS compatibility
-      treasure.style.left = `${Math.random() * 100}%`;
-      treasure.style.top = `${Math.random() * 100}%`;
-      treasure.style.animationDelay = `${Math.random() * 2}s`;
-      treasure.style.animationDuration = `${10 + Math.random() * 10}s`; // Random duration between 10-20s
+      treasure.style.left = `${Math.random() * 95}%`;
+      treasure.style.top = `${Math.random() * 90}%`;
+      treasure.style.animationDelay = `${Math.random() * 3}s`;
+      treasure.style.animationDuration = `${12 + Math.random() * 8}s`; // Random duration between 12-20s
       
       treasure.addEventListener('click', () => this.collectTreasure(treasure));
       this.beachScene.appendChild(treasure);
+    }
+  }
+
+  addBeachAmbience() {
+    // Add subtle beach wave effects
+    for (let i = 0; i < 3; i++) {
+      const wave = document.createElement('div');
+      wave.className = 'beach-wave';
+      wave.style.cssText = `
+        position: absolute;
+        bottom: ${i * 15}px;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        animation: waveFlow ${8 + i * 2}s linear infinite;
+        pointer-events: none;
+      `;
+      this.beachScene.appendChild(wave);
     }
   }
 
@@ -77,13 +100,28 @@ class BeachTreasureGame {
 
   endGame() {
     this.gameActive = false;
-    this.startButton.textContent = '🏖️ Play Again!';
+    this.startButton.textContent = '🏖️ Start New Beach Hunt!';
     this.startButton.disabled = false;
     
     // Show final score with beach theme
-    const treasureTypes = ['🐚', '⭐', '💎', '🏆', '🦀'];
+    const treasureTypes = ['🐚', '⭐', '💎', '🏆', '🦀', '🌊', '🏝️', '☀️'];
     const randomTreasure = treasureTypes[Math.floor(Math.random() * treasureTypes.length)];
-    alert(`🏖️ Beach Hunt Complete! ${randomTreasure} You found ${this.score} treasures! ${randomTreasure}`);
+    const randomTreasure2 = treasureTypes[Math.floor(Math.random() * treasureTypes.length)];
+    
+    let message = `🏖️ Beach Hunt Complete! ${randomTreasure}\n\n`;
+    message += `🐚 Treasures Found: ${this.score}\n`;
+    
+    if (this.score >= 50) {
+      message += `🏆 AMAZING! You're a Beach Treasure Master! ${randomTreasure2}`;
+    } else if (this.score >= 30) {
+      message += `🌟 Excellent treasure hunting skills! ${randomTreasure2}`;
+    } else if (this.score >= 15) {
+      message += `🌊 Good work, beach explorer! ${randomTreasure2}`;
+    } else {
+      message += `🏖️ Keep practicing your treasure hunting! ${randomTreasure2}`;
+    }
+    
+    alert(message);
   }
 }
 
