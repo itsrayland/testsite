@@ -8,10 +8,9 @@ class BeachTreasureGame {
     this.scoreElement = document.getElementById('score');
     this.timerElement = document.getElementById('timer');
     this.startButton = document.getElementById('startGame');
-    // 🏖️ Beach Treasure Collection - Each with different rarity!
+    // 🏖️ Beach Treasures - Shells, Starfish, and Ocean Gems
     this.treasureTypes = [
-      '🐚', '🦀', '⭐', '💎', '🏆', '🌊', '🏝️', '☀️', '🐠', '🦑', 
-      '🐙', '🦞', '🐡', '🌺', '🥥', '⚡', '🔱', '🧜‍♀️'
+      '🐚', '⭐', '🦀', '🐙', '🐠', '🦞', '🐡', '�'
     ];
     this.collectedTreasures = [];
     
@@ -26,7 +25,7 @@ class BeachTreasureGame {
     this.timeLeft = 60;
     this.collectedTreasures = [];
     this.updateScore();
-    this.startButton.textContent = '🌊 Exploring the Beach... 🏖️';
+    this.startButton.textContent = '�️ Hunting Beach Treasures... �';
     this.startButton.disabled = true;
     
     this.generateBeachTreasures();
