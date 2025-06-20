@@ -22,7 +22,7 @@ class BeachTreasureGame {
     this.timeLeft = 60;
     this.collectedTreasures = [];
     this.updateScore();
-    this.startButton.textContent = '🌊 Beach Hunt in Progress! 🏖️';
+    this.startButton.textContent = '🌊 Exploring the Beach... 🏖️';
     this.startButton.disabled = true;
     
     this.generateBeachTreasures();

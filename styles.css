@@ -87,17 +87,18 @@ body {
   box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
+/* Beach Treasure Styling (formerly .star class) */
 .star {
   position: absolute;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   background: radial-gradient(circle at center, #FFD700 0%, #FFA500 30%, #FF6347 60%, #20B2AA 100%);
   border-radius: 50%;
   animation: beachSparkle 2.5s infinite, oceanDrift 15s linear infinite;
   cursor: pointer;
-  box-shadow: 0 0 20px #FFD700, 0 0 30px #40E0D0, 0 0 40px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 25px #FFD700, 0 0 35px #40E0D0, 0 0 45px rgba(255, 215, 0, 0.4);
   transition: all 0.3s ease;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.4);
 }
 
 .star::before {
@@ -191,10 +192,11 @@ body {
 .instructions {
   text-align: center;
   color: #2F4F4F;
-  background: rgba(240, 248, 255, 0.8);
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(145deg, rgba(255, 248, 220, 0.9), rgba(240, 248, 255, 0.8));
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(64, 224, 208, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 215, 0, 0.2);
 }
 
 .instructions h3 {
