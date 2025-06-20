@@ -8,9 +8,16 @@ class BeachTreasureGame {
     this.scoreElement = document.getElementById('score');
     this.timerElement = document.getElementById('timer');
     this.startButton = document.getElementById('startGame');
-    // 🏖️ Beach Treasures - Shells, Starfish, and Ocean Gems
+    // 🏖️ Beach Treasures - Shells, Starfish, Crabs, and Ocean Creatures
     this.treasureTypes = [
-      '🐚', '⭐', '🦀', '🐙', '🐠', '🦞', '🐡', '�'
+      '🐚', // Shell
+      '⭐', // Starfish
+      '🦀', // Crab
+      '🐙', // Octopus
+      '🐠', // Tropical Fish
+      '🦞', // Lobster
+      '🐡', // Pufferfish
+      '🌊'  // Wave
     ];
     this.collectedTreasures = [];
     
@@ -25,7 +32,7 @@ class BeachTreasureGame {
     this.timeLeft = 60;
     this.collectedTreasures = [];
     this.updateScore();
-    this.startButton.textContent = '�️ Hunting Beach Treasures... �';
+    this.startButton.textContent = '🏖️ Hunting Beach Treasures... 🌊';
     this.startButton.disabled = true;
     
     this.generateBeachTreasures();
@@ -44,11 +51,15 @@ class BeachTreasureGame {
       treasure.style.left = `${Math.random() * 92}%`;
       treasure.style.top = `${Math.random() * 88}%`;
       treasure.style.animationDelay = `${Math.random() * 4}s`;
-      treasure.style.animationDuration = `${15 + Math.random() * 10}s`; // Slower, more graceful movement
+      treasure.style.animationDuration = `${15 + Math.random() * 10}s`; // Slower ocean movement
       
-      // Add treasure type data for scoring variety
-      treasure.dataset.treasureType = this.treasureTypes[Math.floor(Math.random() * this.treasureTypes.length)];
+      // Add treasure type data for variety and scoring
+      const treasureType = this.treasureTypes[Math.floor(Math.random() * this.treasureTypes.length)];
+      treasure.dataset.treasureType = treasureType;
       treasure.dataset.points = Math.floor(Math.random() * 3) + 1; // 1-3 points per treasure
+      
+      // Set the treasure emoji appearance
+      treasure.style.setProperty('--treasure-emoji', `'${treasureType}'`);
       
       treasure.addEventListener('click', () => this.collectBeachTreasure(treasure));
       this.beachScene.appendChild(treasure);
@@ -68,8 +79,9 @@ class BeachTreasureGame {
         height: ${18 + i * 3}px;
         background: linear-gradient(90deg, 
           transparent, 
-          rgba(255,255,255,${0.1 + i * 0.05}), 
+          rgba(135,206,235,${0.1 + i * 0.05}), 
           rgba(64,224,208,0.1),
+          rgba(240,230,140,0.05),
           transparent);
         animation: waveFlow ${7 + i * 2}s linear infinite;
         pointer-events: none;
@@ -79,13 +91,13 @@ class BeachTreasureGame {
     }
     
     // ✨ Add sparkling water effect
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 8; i++) {
       const sparkle = document.createElement('div');
       sparkle.style.cssText = `
         position: absolute;
         width: 4px;
         height: 4px;
-        background: radial-gradient(circle, #40E0D0, transparent);
+        background: radial-gradient(circle, #87CEEB, #40E0D0, transparent);
         top: ${20 + Math.random() * 40}%;
         left: ${Math.random() * 100}%;
         animation: sparkleEffect ${2 + Math.random() * 3}s infinite;
@@ -120,8 +132,10 @@ class BeachTreasureGame {
     newTreasure.style.animationDelay = `${Math.random() * 2}s`;
     newTreasure.style.animationDuration = `${15 + Math.random() * 10}s`;
     
-    newTreasure.dataset.treasureType = this.treasureTypes[Math.floor(Math.random() * this.treasureTypes.length)];
+    const newTreasureType = this.treasureTypes[Math.floor(Math.random() * this.treasureTypes.length)];
+    newTreasure.dataset.treasureType = newTreasureType;
     newTreasure.dataset.points = Math.floor(Math.random() * 3) + 1;
+    newTreasure.style.setProperty('--treasure-emoji', `'${newTreasureType}'`);
     
     newTreasure.addEventListener('click', () => this.collectBeachTreasure(newTreasure));
     this.beachScene.appendChild(newTreasure);
@@ -136,8 +150,8 @@ class BeachTreasureGame {
       pointer-events: none;
       font-size: 24px;
       font-weight: bold;
-      color: #FFD700;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      color: #F0E68C;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px #40E0D0;
       animation: collectEffect 1s ease-out forwards;
       z-index: 1000;
     `;
@@ -165,7 +179,7 @@ class BeachTreasureGame {
 
   endBeachHunt() {
     this.gameActive = false;
-    this.startButton.textContent = '🏖️ Start New Beach Adventure!';
+    this.startButton.textContent = '🏖️ Start Beach Treasure Hunt! 🌊';
     this.startButton.disabled = false;
     
     // Calculate unique treasures collected
@@ -176,21 +190,21 @@ class BeachTreasureGame {
     let message = `🏖️ Beach Treasure Hunt Complete! 🌊\n\n`;
     message += `🐚 Total Score: ${this.score} points\n`;
     message += `🏆 Treasures Collected: ${totalTreasures}\n`;
-    message += `✨ Unique Types Found: ${uniqueTreasures.length}/10\n\n`;
+    message += `✨ Unique Beach Types Found: ${uniqueTreasures.length}/${this.treasureTypes.length}\n\n`;
     
     if (uniqueTreasures.length > 0) {
-      message += `� Your Beach Collection: ${uniqueTreasures.join(' ')}\n\n`;
+      message += `🏖️ Your Beach Collection: ${uniqueTreasures.join(' ')}\n\n`;
     }
     
     // Beach achievement rankings
     if (this.score >= 60) {
-      message += `🏆 LEGENDARY! Beach Treasure Master! 🌟\nYou've become one with the ocean! 🌊`;
+      message += `🏆 LEGENDARY BEACH EXPLORER! 🌟\nYou've mastered the ocean's treasures! 🌊`;
     } else if (this.score >= 40) {
-      message += `🥇 AMAZING! Expert Beach Explorer! ⭐\nThe sea reveals its secrets to you! 🐚`;
+      message += `🥇 AMAZING TREASURE HUNTER! ⭐\nThe sea reveals its secrets to you! 🐚`;
     } else if (this.score >= 25) {
-      message += `🥈 GREAT! Skilled Treasure Hunter! 💎\nYou have a keen eye for beach treasures! 🔍`;
+      message += `🥈 SKILLED BEACH ADVENTURER! 💎\nYou have a keen eye for beach treasures! 🔍`;
     } else if (this.score >= 15) {
-      message += `🥉 GOOD! Beach Adventure Novice! 🌊\nYou're getting the hang of treasure hunting! 🏖️`;
+      message += `🥉 BEACH TREASURE NOVICE! 🌊\nYou're learning the ways of the shore! 🏖️`;
     } else {
       message += `🏖️ Keep exploring the beach paradise! ☀️\nEvery treasure hunter started somewhere! 🐚`;
     }
