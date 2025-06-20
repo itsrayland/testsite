@@ -1,0 +1,44 @@
+[build]
+  # Build command (not needed for static site, but can be used for optimization)
+  command = "echo 'Building Beach Resort Website 🏖️'"
+  
+  # Directory to publish (root directory since index.html is in root)
+  publish = "."
+
+[build.environment]
+  # Set Node.js version if needed for any build tools
+  NODE_VERSION = "18"
+
+# Redirect rules for SPA behavior (optional)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"]}
+
+# Headers for better performance and security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Development context (for preview deployments)
+[context.deploy-preview]
+  command = "echo 'Beach Resort Preview Deployment 🌊'"
+
+[context.branch-deploy]
+  command = "echo 'Beach Resort Branch Deployment 🏖️'"
