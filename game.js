@@ -1,10 +1,10 @@
-class StarGame {
+class BeachTreasureGame {
   constructor() {
     this.score = 0;
     this.timeLeft = 60;
     this.gameActive = false;
-    this.starCount = 15; // Reduced count since stars are bigger
-    this.nightSky = document.getElementById('nightSky');
+    this.treasureCount = 15; // Reduced count since treasures are bigger
+    this.beachScene = document.getElementById('nightSky'); // Keeping the same ID for compatibility
     this.scoreElement = document.getElementById('score');
     this.timerElement = document.getElementById('timer');
     this.startButton = document.getElementById('startGame');
@@ -19,44 +19,44 @@ class StarGame {
     this.score = 0;
     this.timeLeft = 60;
     this.updateScore();
-    this.startButton.textContent = 'Game in Progress!';
+    this.startButton.textContent = '🌊 Beach Hunt in Progress!';
     this.startButton.disabled = true;
     
-    this.generateStars();
+    this.generateTreasures();
     this.startTimer();
   }
 
-  generateStars() {
-    this.nightSky.innerHTML = '';
-    for (let i = 0; i < this.starCount; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.animationDelay = `${Math.random() * 2}s`;
-      star.style.animationDuration = `${10 + Math.random() * 10}s`; // Random duration between 10-20s
+  generateTreasures() {
+    this.beachScene.innerHTML = '';
+    for (let i = 0; i < this.treasureCount; i++) {
+      const treasure = document.createElement('div');
+      treasure.className = 'star'; // Keeping the same class for CSS compatibility
+      treasure.style.left = `${Math.random() * 100}%`;
+      treasure.style.top = `${Math.random() * 100}%`;
+      treasure.style.animationDelay = `${Math.random() * 2}s`;
+      treasure.style.animationDuration = `${10 + Math.random() * 10}s`; // Random duration between 10-20s
       
-      star.addEventListener('click', () => this.collectStar(star));
-      this.nightSky.appendChild(star);
+      treasure.addEventListener('click', () => this.collectTreasure(treasure));
+      this.beachScene.appendChild(treasure);
     }
   }
 
-  collectStar(star) {
+  collectTreasure(treasure) {
     if (!this.gameActive) return;
     
-    star.remove();
+    treasure.remove();
     this.score++;
     this.updateScore();
     
-    // Generate a new star
-    const newStar = document.createElement('div');
-    newStar.className = 'star';
-    newStar.style.left = `${Math.random() * 100}%`;
-    newStar.style.top = `${Math.random() * 100}%`;
-    newStar.style.animationDelay = `${Math.random() * 2}s`;
-    newStar.style.animationDuration = `${10 + Math.random() * 10}s`; // Random duration between 10-20s
-    newStar.addEventListener('click', () => this.collectStar(newStar));
-    this.nightSky.appendChild(newStar);
+    // Generate a new treasure
+    const newTreasure = document.createElement('div');
+    newTreasure.className = 'star'; // Keeping the same class for CSS compatibility
+    newTreasure.style.left = `${Math.random() * 100}%`;
+    newTreasure.style.top = `${Math.random() * 100}%`;
+    newTreasure.style.animationDelay = `${Math.random() * 2}s`;
+    newTreasure.style.animationDuration = `${10 + Math.random() * 10}s`; // Random duration between 10-20s
+    newTreasure.addEventListener('click', () => this.collectTreasure(newTreasure));
+    this.beachScene.appendChild(newTreasure);
   }
 
   updateScore() {
@@ -77,15 +77,17 @@ class StarGame {
 
   endGame() {
     this.gameActive = false;
-    this.startButton.textContent = 'Play Again!';
+    this.startButton.textContent = '🏖️ Play Again!';
     this.startButton.disabled = false;
     
-    // Show final score
-    alert(`Game Over! You found ${this.score} stars!`);
+    // Show final score with beach theme
+    const treasureTypes = ['🐚', '⭐', '💎', '🏆', '🦀'];
+    const randomTreasure = treasureTypes[Math.floor(Math.random() * treasureTypes.length)];
+    alert(`🏖️ Beach Hunt Complete! ${randomTreasure} You found ${this.score} treasures! ${randomTreasure}`);
   }
 }
 
-// Initialize the game when the page loads
+// Initialize the beach treasure game when the page loads
 window.addEventListener('load', () => {
-  new StarGame();
+  new BeachTreasureGame();
 }); 
