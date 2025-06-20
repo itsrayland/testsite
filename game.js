@@ -8,7 +8,11 @@ class BeachTreasureGame {
     this.scoreElement = document.getElementById('score');
     this.timerElement = document.getElementById('timer');
     this.startButton = document.getElementById('startGame');
-    this.treasureTypes = ['🐚', '🦀', '⭐', '💎', '🏆', '🌊', '🏝️', '☀️', '🐠', '🦑'];
+    // 🏖️ Beach Treasure Collection - Each with different rarity!
+    this.treasureTypes = [
+      '🐚', '🦀', '⭐', '💎', '🏆', '🌊', '🏝️', '☀️', '🐠', '🦑', 
+      '🐙', '🦞', '🐡', '🌺', '🥥', '⚡', '🔱', '🧜‍♀️'
+    ];
     this.collectedTreasures = [];
     
     this.startButton.addEventListener('click', () => this.startBeachHunt());
@@ -53,21 +57,42 @@ class BeachTreasureGame {
   }
 
   addBeachAmbience() {
-    // Add subtle beach wave effects
-    for (let i = 0; i < 3; i++) {
+    // 🌊 Create magical beach wave effects
+    for (let i = 0; i < 4; i++) {
       const wave = document.createElement('div');
       wave.className = 'beach-wave';
       wave.style.cssText = `
         position: absolute;
-        bottom: ${i * 15}px;
+        bottom: ${i * 12}px;
         left: 0;
         width: 100%;
-        height: 20px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-        animation: waveFlow ${8 + i * 2}s linear infinite;
+        height: ${18 + i * 3}px;
+        background: linear-gradient(90deg, 
+          transparent, 
+          rgba(255,255,255,${0.1 + i * 0.05}), 
+          rgba(64,224,208,0.1),
+          transparent);
+        animation: waveFlow ${7 + i * 2}s linear infinite;
         pointer-events: none;
+        border-radius: 50% 50% 0 0;
       `;
       this.beachScene.appendChild(wave);
+    }
+    
+    // ✨ Add sparkling water effect
+    for (let i = 0; i < 6; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.style.cssText = `
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: radial-gradient(circle, #40E0D0, transparent);
+        top: ${20 + Math.random() * 40}%;
+        left: ${Math.random() * 100}%;
+        animation: sparkleEffect ${2 + Math.random() * 3}s infinite;
+        pointer-events: none;
+      `;
+      this.beachScene.appendChild(sparkle);
     }
   }
 

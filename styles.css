@@ -1,11 +1,17 @@
+/* 🏖️ Tropical Beach Paradise Background */
 body {
   margin: 0;
   height: 100vh;
-  background: linear-gradient(135deg, #87CEEB 0%, #40E0D0 25%, #F0E68C 75%, #DEB887 100%);
+  background: linear-gradient(135deg, 
+    #87CEEB 0%,     /* Sky Blue */
+    #40E0D0 25%,    /* Turquoise */ 
+    #20B2AA 50%,    /* Light Sea Green */
+    #F0E68C 75%,    /* Khaki (Sandy) */
+    #DEB887 100%);  /* Burlywood (Beach Sand) */
   background-size: 400% 400%;
   animation: beachWave 8s ease-in-out infinite;
   font-family: 'Poppins', sans-serif;
-  color: #2F4F4F;
+  color: #2F4F4F; /* Dark Slate Gray */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,13 +75,22 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* 🌊 Ocean to Beach Scene */
 .beach-scene {
   flex-grow: 1;
-  background: linear-gradient(to bottom, #87CEEB 0%, #40E0D0 30%, #20B2AA 60%, #F0E68C 100%);
+  background: linear-gradient(to bottom, 
+    #87CEEB 0%,     /* Deep Ocean - Sky Blue */
+    #40E0D0 20%,    /* Surface Waters - Turquoise */
+    #20B2AA 40%,    /* Shallow Waters - Light Sea Green */
+    #48D1CC 60%,    /* Shore Waters - Medium Turquoise */
+    #F0E68C 80%,    /* Wet Sand - Khaki */
+    #DEB887 100%);  /* Dry Beach Sand - Burlywood */
   border-radius: 15px;
   position: relative;
   overflow: hidden;
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    inset 0 0 30px rgba(255, 255, 255, 0.4),
+    0 4px 20px rgba(64, 224, 208, 0.3);
 }
 
 .night-sky {
@@ -289,6 +304,18 @@ p {
   100% {
     transform: translateY(-60px) scale(0.8);
     opacity: 0;
+  }
+}
+
+/* ✨ Sparkling water effect animation */
+@keyframes sparkleEffect {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
   }
 }
 
