@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Zone Calendar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f7;
+            padding: 20px;
+            color: #1d1d1f;
+        }
+
+        .calendar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Header with calendar days */
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e5e5e7;
+            gap: 15px;
+            overflow-x: auto;
+            background-color: #fafafa;
+        }
+
+        .calendar-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            height: 40px;
+            background-color: #f5f5f7;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .calendar-icon::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .day-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 60px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .day-item:hover {
+            background-color: #f0f0f2;
+        }
+
+        .day-item.today {
+            background-color: #007aff;
+            color: white;
+        }
+
+        .day-item.selected {
+            background-color: #e8e8ea;
+            color: #1d1d1f;
+            font-weight: 500;
+        }
+
+        .day-name {
+            font-size: 12px;
+            opacity: 0.7;
+            text-transform: uppercase;
+        }
+
+        .day-date {
+            font-size: 18px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .day-item.weekend .day-name,
+        .day-item.weekend .day-date {
+            color: #ff3b30;
+        }
+
+        .day-item.today.weekend .day-name,
+        .day-item.today.weekend .day-date {
+            color: white;
+        }
+
+        /* Time zones section */
+        .timezones-container {
+            padding: 20px;
+        }
+
+        .timezone-row {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e5e7;
+            gap: 20px;
+        }
+
+        .timezone-row:last-child {
+            border-bottom: none;
+        }
+
+        .timezone-info {
+            min-width: 180px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .timezone-offset {
+            font-size: 12px;
+            color: #86868b;
+        }
+
+        .timezone-name {
+            font-size: 20px;
+            font-weight: 400;
+            color: #1d1d1f;
+        }
+
+        .timezone-abbreviation {
+            font-size: 12px;
+            color: #86868b;
+            margin-left: 4px;
+        }
+
+        .timezone-time {
+            font-size: 20px;
+            font-weight: 400;
+            min-width: 100px;
+            text-align: right;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            flex: 1;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            padding: 0 10px;
+        }
+
+        .hour-block {
+            min-width: 50px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            margin: 0 1px;
+            background-color: #f5f5f7;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .hour-block:hover {
+            background-color: #e8e8ea;
+        }
+
+        .hour-block.current {
+            background-color: #5e9cee;
+            color: white;
+        }
+
+        .hour-block.past {
+            opacity: 0.5;
+        }
+
+        .hour-time {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .hour-period {
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .hour-block.current .hour-period {
+            opacity: 0.9;
+        }
+
+        /* Controls */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid #e5e5e7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-btn:hover {
+            background-color: #f5f5f7;
+            transform: scale(1.05);
+        }
+
+        /* Add timezone button */
+        .add-timezone-btn {
+            background-color: #007aff;
+            color: white;
+            border: none;
+            font-size: 24px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        .add-timezone-btn:hover {
+            background-color: #0051d5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timezone-info {
+                min-width: 120px;
+            }
+            
+            .timezone-name {
+                font-size: 16px;
+            }
+            
+            .timezone-time {
+                font-size: 16px;
+                min-width: 80px;
+            }
+            
+            .hour-block {
+                min-width: 40px;
+                height: 35px;
+            }
+            
+            .hour-time {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="control-btn add-timezone-btn" onclick="addTimezone()">+</button>
+    
+    <div class="calendar-container">
+        <div class="calendar-header" id="calendarHeader">
+            <div class="calendar-icon"></div>
+        </div>
+        
+        <div class="timezones-container" id="timezonesContainer">
+            <!-- Time zones will be added here dynamically -->
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="control-btn" onclick="toggleView()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+        </button>
+        <button class="control-btn" onclick="toggleSettings()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v6m0 6v6m3.22-10.22l4.24 4.24m-4.24 4.24l4.24 4.24M21 12h-6m-6 0H3m3.22-3.22L2 4.54m4.24 4.24L2 13.02"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Default time zones
+        const defaultTimezones = [
+            { name: 'New York', timezone: 'America/New_York', offset: 'EDT' },
+            { name: 'Istanbul', timezone: 'Europe/Istanbul', offset: 'GMT+3' },
+            { name: 'Saipan', timezone: 'Pacific/Saipan', offset: 'ChST' }
+        ];
+
+        let timezones = [...defaultTimezones];
+        let selectedDate = new Date();
+
+        // Initialize calendar
+        function initCalendar() {
+            generateCalendarDays();
+            updateTimezones();
+            setInterval(updateTimezones, 60000); // Update every minute
+        }
+
+        // Generate calendar days
+        function generateCalendarDays() {
+            const header = document.getElementById('calendarHeader');
+            const today = new Date();
+            
+            // Keep the calendar icon
+            const calendarIcon = header.querySelector('.calendar-icon');
+            header.innerHTML = '';
+            header.appendChild(calendarIcon);
+            
+            // Generate 14 days
+            for (let i = -7; i < 7; i++) {
+                const date = new Date();
+                date.setDate(today.getDate() + i);
+                
+                const dayItem = document.createElement('div');
+                dayItem.className = 'day-item';
+                
+                // Check if it's today
+                if (date.toDateString() === today.toDateString()) {
+                    dayItem.classList.add('today');
+                }
+                
+                // Check if it's selected
+                if (date.toDateString() === selectedDate.toDateString()) {
+                    dayItem.classList.add('selected');
+                }
+                
+                // Check if it's weekend
+                if (date.getDay() === 0 || date.getDay() === 6) {
+                    dayItem.classList.add('weekend');
+                }
+                
+                const dayName = document.createElement('div');
+                dayName.className = 'day-name';
+                dayName.textContent = date.toLocaleDateString('en-US', { weekday: 'short' });
+                
+                const dayDate = document.createElement('div');
+                dayDate.className = 'day-date';
+                if (i === 0 || date.getDate() === 1) {
+                    dayDate.textContent = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                } else {
+                    dayDate.textContent = date.getDate();
+                }
+                
+                dayItem.appendChild(dayName);
+                dayItem.appendChild(dayDate);
+                
+                dayItem.addEventListener('click', () => selectDate(date));
+                
+                header.appendChild(dayItem);
+            }
+        }
+
+        // Select date
+        function selectDate(date) {
+            selectedDate = date;
+            generateCalendarDays();
+            updateTimezones();
+        }
+
+        // Update time zones
+        function updateTimezones() {
+            const container = document.getElementById('timezonesContainer');
+            container.innerHTML = '';
+            
+            timezones.forEach((tz, index) => {
+                const row = createTimezoneRow(tz, index);
+                container.appendChild(row);
+            });
+        }
+
+        // Create timezone row
+        function createTimezoneRow(tz, index) {
+            const row = document.createElement('div');
+            row.className = 'timezone-row';
+            
+            // Timezone info
+            const info = document.createElement('div');
+            info.className = 'timezone-info';
+            
+            const offset = document.createElement('div');
+            offset.className = 'timezone-offset';
+            offset.textContent = '+' + index;
+            
+            const name = document.createElement('div');
+            name.className = 'timezone-name';
+            name.innerHTML = tz.name + `<span class="timezone-abbreviation">${tz.offset}</span>`;
+            
+            info.appendChild(offset);
+            info.appendChild(name);
+            
+            // Current time
+            const currentTime = getCurrentTimeInTimezone(tz.timezone);
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'timezone-time';
+            timeDiv.textContent = currentTime;
+            
+            // Timeline
+            const timeline = createTimeline(tz.timezone);
+            
+            row.appendChild(info);
+            row.appendChild(timeline);
+            row.appendChild(timeDiv);
+            
+            return row;
+        }
+
+        // Get current time in timezone
+        function getCurrentTimeInTimezone(timezone) {
+            const now = new Date();
+            const options = {
+                timeZone: timezone,
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            };
+            return now.toLocaleTimeString('en-US', options).toLowerCase();
+        }
+
+        // Create timeline
+        function createTimeline(timezone) {
+            const container = document.createElement('div');
+            container.className = 'timeline-container';
+            
+            const now = new Date();
+            const currentHour = parseInt(now.toLocaleTimeString('en-US', { 
+                timeZone: timezone, 
+                hour: 'numeric', 
+                hour12: false 
+            }));
+            
+            // Show 24 hours
+            for (let i = 0; i < 24; i++) {
+                const hourBlock = document.createElement('div');
+                hourBlock.className = 'hour-block';
+                
+                if (i === currentHour) {
+                    hourBlock.classList.add('current');
+                } else if (i < currentHour) {
+                    hourBlock.classList.add('past');
+                }
+                
+                const hourTime = document.createElement('div');
+                hourTime.className = 'hour-time';
+                const hour12 = i === 0 ? 12 : i > 12 ? i - 12 : i;
+                hourTime.textContent = hour12;
+                
+                const period = document.createElement('div');
+                period.className = 'hour-period';
+                period.textContent = i < 12 ? 'am' : 'pm';
+                
+                hourBlock.appendChild(hourTime);
+                hourBlock.appendChild(period);
+                
+                container.appendChild(hourBlock);
+            }
+            
+            // Scroll to current hour
+            setTimeout(() => {
+                const currentBlock = container.querySelector('.current');
+                if (currentBlock) {
+                    currentBlock.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+                }
+            }, 100);
+            
+            return container;
+        }
+
+        // Add timezone (placeholder)
+        function addTimezone() {
+            alert('Add timezone functionality would go here');
+        }
+
+        // Toggle view (placeholder)
+        function toggleView() {
+            alert('Toggle view functionality would go here');
+        }
+
+        // Toggle settings (placeholder)
+        function toggleSettings() {
+            alert('Settings functionality would go here');
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initCalendar);
+    </script>
+</body>
+</html>
