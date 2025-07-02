@@ -15,4 +15,22 @@ node_modules/
 
 # OS files
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Node (in case you add it later)
+node_modules/
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp 

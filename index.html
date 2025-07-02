@@ -2,49 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>🏖️ Beach Treasure Hunt 🌊</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Sticky Notes & Chat</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="css-tricks.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-brand">🏖️ Ramin & Rays Beach Resort 🌊</div>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link active">🐚 Beach Treasures</a>
-      <a href="css-tricks.html" class="nav-link">🎨 CSS Tricks</a>
-      <a href="airline-booking.html" class="nav-link">✈️ Airline Booking</a>
-      <a href="airtable-manager.html" class="nav-link">📊 Data Manager</a>
-      <a href="inline-nav.html" class="nav-link">🧭 Navigation</a>
-    </div>
-  </nav>
+  <div class="container">
+    <header>
+      <h1>Company Workspace</h1>
+      <p>Sticky Notes & Team Chat</p>
+    </header>
 
-  <div class="game-container">
-    <h1 class="game-title">🏖️ Beach Treasure Hunt 🐚🌊</h1>
-    
-    <div class="score-board">
-      <h2>🐚 Beach Treasures: <span id="score">0</span> 🏆</h2>
-      <h3>🌊 Time Left: <span id="timer">60</span>s ⏰</h3>
-    </div>
-    
-    <div class="beach-scene" id="nightSky">
-      <!-- 🏖️ Magical beach treasures will wash ashore here! 🌊 -->
-      <!-- Collect shells, starfish, pearls, and ocean gems! 🐚⭐💎 -->
-    </div>
+    <div class="main-content">
+      <!-- Sticky Notes Section -->
+      <section class="sticky-notes-section">
+        <div class="section-header">
+          <h2>Sticky Notes</h2>
+          <button id="addNoteBtn" class="add-btn">+ Add Note</button>
+        </div>
+        <div id="notesContainer" class="notes-container"></div>
+      </section>
 
-    <div class="controls">
-      <button id="startGame">�️ Start Beach Treasure Hunt! 🌊</button>
-      <div class="instructions">
-        <h3>🏖️ Beach Treasure Hunt Rules:</h3>
-        <p>🐚 Click on the magical beach treasures washing ashore!</p>
-        <p>⭐ Collect shells, starfish, and ocean gems before time runs out!</p>
-        <p>� Ride the waves and become the ultimate beach explorer!</p>
-        <p>� Each treasure has different point values - aim for the rare ones!</p>
-      </div>
+      <!-- Chat Section -->
+      <section class="chat-section">
+        <div class="section-header">
+          <h2>Team Chat</h2>
+          <span class="online-indicator">● Online</span>
+        </div>
+        <div id="chatMessages" class="chat-messages"></div>
+        <div class="chat-input-container">
+          <input type="text" id="chatInput" placeholder="Type a message..." />
+          <button id="sendBtn" class="send-btn">Send</button>
+        </div>
+      </section>
     </div>
   </div>
 
-  <script src="game.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
